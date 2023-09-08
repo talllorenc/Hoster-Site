@@ -1,8 +1,5 @@
-"use client"
-
 import Link from "next/link"
 import Image from "next/image"
-import styles from './page.module.css'
 
 const links = [
     {
@@ -46,7 +43,7 @@ const Navbar = () => {
                 {links.map((link)=>(
                     <Link key={link.id} href={link.url}>{link.title}</Link>
                 ))}
-                <button className=" px-[5px] py-[2px] bg-red-500 text-white rounded cursor-pointer hover:bg-red-800" onClick={(()=> console.log('logout'))}>Logout</button>
+                <button className=" px-[5px] py-[2px] bg-red-500 text-white rounded cursor-pointer hover:bg-red-800">Logout</button>
             </div>
         </nav>
     )
