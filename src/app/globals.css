@@ -14,6 +14,7 @@ body {
   overflow-x: hidden;
   background-color: black;
   color: white;
+  font-family: Montserrat;
 }
 
 a {
@@ -29,5 +30,32 @@ a {
   flex-direction: column;
   justify-content: space-between;
 }
+
+.shadow-white {
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.5); 
+}
+
+.rotate-image {
+  transition: transform 0.7s; /* Настройте скорость анимации по вашему усмотрению */
+}
+
+/* Примените анимацию только при наведении на Link */
+a:hover .rotate-image {
+  transform: rotate(360deg); /* Вращение на 360 градусов при наведении на Link */
+}
+
+
+.background {
+  background-image: url('/main-page.png'); /* Путь к вашему изображению */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+
+
+
+
 
 

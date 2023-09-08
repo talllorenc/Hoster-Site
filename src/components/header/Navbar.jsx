@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import styles from './page.module.css'
 
 const links = [
@@ -33,15 +34,19 @@ const links = [
 
 const Navbar = () => {
   return (
-        <nav className={styles.container}>
-            <Link href={"/"} className={styles.logo}>
-                MyApp
+        <nav className="h-100 flex justify-between items-center px-[20px] py-[10px] max-w-[1980px] mx-auto">
+            <Link href={"/"} className="font-bold text-[22px]">
+                <div className="flex items-center ">
+                    <Image src="/main-logo.svg" width={40} height={40} alt="logo" className="mr-[8px] rotate-image transition-transform"/>
+                    <span className="font-light">HOSTER</span>
+                    <span className="text-red-500">dev</span>
+                </div>
             </Link>
-            <div className={styles.links}>
+            <div className="hidden flex items-center gap-[20px] md:flex">
                 {links.map((link)=>(
                     <Link key={link.id} href={link.url}>{link.title}</Link>
                 ))}
-                <button className={styles.logout} onClick={(()=> console.log('logout'))}>Logout</button>
+                <button className=" px-[5px] py-[2px] bg-red-500 text-white rounded cursor-pointer hover:bg-red-800" onClick={(()=> console.log('logout'))}>Logout</button>
             </div>
         </nav>
     )
