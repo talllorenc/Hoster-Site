@@ -12,7 +12,7 @@ export default function Home() {
               <span className="text-5xl xs:text-2xl in:text-[35px] md:text-[25px] lg:text-[50px]">
                 HOSTER{" "}
               </span>
-              <span className="text-5xl xs:text-2xl font-bold text-red-500 in:text-[20px] md:text-[25px] lg:text-[50px]">
+              <span className="text-5xl xs:text-2xl font-bold text-red-500 in:text-[35px] md:text-[25px] lg:text-[50px]">
                 forDevelopers
               </span>
             </div>
