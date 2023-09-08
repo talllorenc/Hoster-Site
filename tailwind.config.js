@@ -1,11 +1,10 @@
-/** @type {import('tailwindcss').Config} */
+
+
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
- 
-    // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
@@ -15,7 +14,12 @@ module.exports = {
       'md': '960px',
       'lg': '1315px',
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        roboto: ['Roboto', 'sans'],
+        source: ['Source Code Pro']
+      },
+    },
   },
   plugins: [],
 }
