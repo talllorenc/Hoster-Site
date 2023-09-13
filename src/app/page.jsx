@@ -1,9 +1,23 @@
+"use client";
+
 import Button from "@/components/button/Button";
 import Image from "next/image";
 import Hero from "../../public/hoster.png";
+import { useContext } from "react";
+import { ThemeContext } from "@/context/ThemeContext";
+
 export default function Home() {
+  const { mode } = useContext(ThemeContext);
+
+  const backgroundClass =
+    mode === "light"
+      ? "bg-[url(/main-page-light.png)] theme"
+      : "bg-[url(/main-page.png)] theme";
+
   return (
-    <div className="background h-screen flex">
+    <div
+      className={`flex ${backgroundClass} bg-no-repeat bg-center bg-cover h-screen`}
+    >
       <main className=" flex items-center gap-[100px] max-w-[1600px] mx-auto py-[0] px-[15px] box-content xs:justify-center">
         <div className="flex items-center justify-between">
           <div className="xs:flex xs:flex-col xs:justify-center xs:items-center md:flex md:justify-start md:items-center">
@@ -21,13 +35,6 @@ export default function Home() {
             <Button url="/solutions" text="Готовые решения" />
           </div>
         </div>
-        <div className="hidden w-full max-w-lg md:block">
-            <Image
-              src={Hero}
-              alt="main photo"
-              className="h-auto object-contain rounded-md shadow-white"
-            />
-          </div>
       </main>
     </div>
   );

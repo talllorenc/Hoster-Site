@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const About = () => {
   return (
-    <div className="flex flex-col max-w-[1240px] mx-auto  py-[10px] px-[15px]">
+    <div className="flex flex-col max-w-[1240px] mx-auto py-[10px] px-[15px]">
       <Image
         className="h-auto object-contain rounded-md"
         src="/about3.jpeg"
