@@ -19,11 +19,6 @@ const links = [
     },
     {
         id: 3,
-        title: "Документы",
-        url: "/documents"
-    },
-    {
-        id: 4,
         title: "Разработчики",
         url: "/developers"
     }

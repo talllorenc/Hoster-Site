@@ -1,50 +1,138 @@
+"use client";
+
+import LeftMenu from "@/components/LeftMenu/LeftMenu";
 import Link from "next/link";
+import Image from "next/image";
 import { useContext } from "react";
 import { ThemeContext } from "@/context/ThemeContext";
 
-async function getData() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
-    cache: "no-store",
-  });
+const Solutions = () => {
+  const { mode } = useContext(ThemeContext);
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
+  const textClass = mode === "light" ? "text-zinc-950" : "text-white";
 
-  return res.json();
-}
 
-const Solutions = async () => {
-  const data = await getData();
   return (
-    <div className="flex flex-col justify-center mx-auto border-t-0 border border-zinc-500">
-      <div className="max-w-[1600px] bg-[#1f2937] px-[15px] py-[15px] border-b border border-zinc-500">
-        <div className="flex items-center justify-between mb-[25px]">
-          <span className="font-bold text-[30px]">Готовые решения</span>
-          <button className="bg-blue-500 font-bold text-[18px] px-[20px] py-[10px] rounded">
-            Добавить решение
-          </button>
-        </div>
-        <div className="flex items-center justify-between mb-[25px]">
-          <span className="font-bold text-[22px]">Решений - 185</span>
-          <input
-            type="text"
-            placeholder="Какой у вас вопрос?"
-            className="text-black font-bold px-[15px] py-[10px] rounded-lg w-[500px] outline-none focus:bg-zinc-100"
-          />
-        </div>
-      </div>
-      <div className="container bg-[#262626]">
-        {data.map((item) => (
-          <div className="border-b border-[#a3a3a3] py-[15px]" key={item.id}>
-            <Link href={`solutions/${item.id}`}>
-              <h1 className="text-[24px] font-bold text-[#0074CC] cursor-pointer inline-block hover:underline">
-                {item.title}
-              </h1>
-            </Link>
-            <p>{item.body}</p>
+    <div className="flex justify-center px-4 py-10">
+      <div className="flex max-w-[1350px]">
+        <LeftMenu />
+        <div className="flex flex-col">
+          <div className={`max-w-[650px] text-white`}>
+            <h1 className={`text-[30px] font-bold ${textClass}`}>Предисловие</h1>
+            <div className="bg-zinc-900 rounded-xl p-5">
+              <div className="border-b py-[15px] flex items-center">
+                Добро пожаловать в раздел "Готовые решения". Здесь собраны все
+                решения, созданные нашими опытными разработчиками. Мы стремимся
+                предоставить вам доступ к широкому спектру готовых решений,
+                которые помогут вам решить самые разнообразные задачи и
+                проблемы.
+                <Image
+                  src="/solutions/solution.png"
+                  className="ml-[10px]"
+                  width={120}
+                  height={120}
+                />
+              </div>
+              <div className="border-b py-[15px] flex items-center">
+                Мы понимаем, что каждый проект уникален, поэтому предлагаем вам
+                не только использовать готовые решения, но и добавлять свои
+                собственные. Здесь вы найдете инструменты и ресурсы, чтобы
+                делиться своим опытом и решениями с нашими коллегами.
+                <Image
+                  src="/solutions/services.png"
+                  className="ml-[10px]"
+                  width={120}
+                  height={120}
+                />
+              </div>
+              <div className="py-[15px] flex items-center">
+                Независимо от того, в поиске ли вы решения для своего проекта
+                или желаете поделиться своими идеями и решениями, раздел
+                "Готовые решения" создан для вас.
+                <Image
+                  src="/solutions/documentation.png"
+                  className="ml-[10px]"
+                  width={120}
+                  height={120}
+                />
+              </div>
+            </div>
           </div>
-        ))}
+
+          <div className="max-w-[650px] text-white">
+            <h1 className={`text-[30px] font-bold ${textClass}`}>Полезные ссылки</h1>
+            <div className="bg-zinc-900 rounded-xl p-5">
+              <div className="flex flex-col py-[15px]">
+                <span className="mb-[10px]">
+                  Иконки взяты с сайта{" "}
+                  <a
+                    className="bg-orange-700 px-[5px] rounded-lg"
+                    href="https://www.flaticon.com/ru/"
+                    title=" иконки"
+                    target="_blank"
+                  >
+                    "Иконки от Graphix Dxinerz - Flaticon"
+                  </a>
+                </span>
+                <span className="mb-[10px]">
+                  Сайт разработан при помощи{" "}
+                  <a
+                    className="bg-orange-700 px-[5px] rounded-lg"
+                    href="https://nextjs.org/"
+                    title=" иконки"
+                    target="_blank"
+                  >
+                    "Next.js (v.9.6.7)"
+                  </a>
+                </span>
+                <span className="mb-[10px]">
+                  Для стилизации сайта использовался CSS-фреймворк{" "}
+                  <a
+                    className="bg-orange-700 px-[5px] rounded-lg"
+                    href="https://tailwindcss.ru/"
+                    title=" иконки"
+                    target="_blank"
+                  >
+                    "tailwindcss"
+                  </a>
+                </span>
+                <span className="mb-[10px]">
+                  В качестве облачной платформы был использован{" "}
+                  <a
+                    className="bg-orange-700 px-[5px] rounded-lg"
+                    href="https://vercel.com/"
+                    title=" иконки"
+                    target="_blank"
+                  >
+                    "versel"
+                  </a>
+                </span>
+                <span className="mb-[10px]">
+                  Система контроля версий{" "}
+                  <a
+                    className="bg-orange-700 px-[5px] rounded-lg"
+                    href="https://github.com/"
+                    title=" иконки"
+                    target="_blank"
+                  >
+                    "github"
+                  </a>
+                </span>
+                <span className="mb-[10px]">
+                  Репозиторий с проектом{" "}
+                  <a
+                    className="bg-orange-700 px-[5px] rounded-lg"
+                    href="https://github.com/talllorenc/Hoster-Site"
+                    title=" иконки"
+                    target="_blank"
+                  >
+                    "talllorenc/github"
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

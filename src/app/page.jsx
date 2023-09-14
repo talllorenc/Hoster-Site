@@ -1,8 +1,6 @@
 "use client";
 
 import Button from "@/components/button/Button";
-import Image from "next/image";
-import Hero from "../../public/hoster.png";
 import { useContext } from "react";
 import { ThemeContext } from "@/context/ThemeContext";
 
@@ -32,7 +30,7 @@ export default function Home() {
             </div>
 
             {/* Кнопка (оставляю ее здесь для примера) */}
-            <Button url="/solutions" text="Готовые решения" />
+            <Button url="/done_solutions" text="Готовые решения" />
           </div>
         </div>
       </main>
