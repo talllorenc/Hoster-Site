@@ -21,7 +21,7 @@ const links = [
         id: 3,
         title: "Разработчики",
         url: "/developers"
-    }
+    },
 ]
 
 const Navbar = () => {
@@ -47,7 +47,7 @@ const Navbar = () => {
             </div>
             <div className="flex">
                 <DarkModeToggle/>
-                <button className=" px-[5px] py-[2px] bg-red-500 text-white rounded cursor-pointer hover:bg-red-800 ml-[20px]">Logout</button>
+                <button className=" px-[5px] py-[2px] bg-[#0074CC] text-white rounded cursor-pointer hover:bg-[#0050CC] ml-[20px]">Войти</button>
             </div>
 
 

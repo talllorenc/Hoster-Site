@@ -7,6 +7,9 @@ async function getData() {
     cache: "no-store",
   });
 
+  console.log(res.status);
+  console.log(res.statusText);
+
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -20,7 +23,7 @@ const DoneSolutions = async () => {
     <div className="flex justify-center px-4 py-10">
       <div className="flex max-w-[1350px]">
         <LeftMenu />
-        <div className="max-w-[650px]">
+        <div className="max-w-[650px] w-full">
           <div className="flex flex-col">
             <SearchBar />
             <div className="flex items-center justify-between">
@@ -34,7 +37,14 @@ const DoneSolutions = async () => {
                   {item.title}
                 </h1>
               </Link>
-              <p>{item.body}</p>
+              <div className="flex justify-between">
+                <p>
+                  {item.body}
+                </p>
+                {/* <div className="text-orange-500 font-bold underline ">
+                  <span className="cursor-pointer">Александр Боярчук</span>
+                </div> */}
+              </div>
             </div>
           ))}
         </div>
