@@ -3,7 +3,7 @@ import SearchBar from "@/components/SearchBar/SearchBar";
 import Link from "next/link";
 
 async function getData() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
+  const res = await fetch("http://localhost:8080/api/home", {
     cache: "no-store",
   });
 
@@ -31,19 +31,19 @@ const DoneSolutions = async () => {
             </div>
           </div>
           {data.map((item) => (
-            <div className="border-b border-[#a3a3a3]" key={item.id}>
-              <Link href={`done_solutions/${item.id}`}>
+            <div className="border-b border-[#a3a3a3]" key={item._id}>
+              <Link href={`done_solutions/${item._id}`}>
                 <h1 className="text-[24px] font-bold text-[#0074CC] cursor-pointer inline-block hover:underline">
                   {item.title}
                 </h1>
               </Link>
               <div className="flex justify-between">
                 <p>
-                  {item.body}
+                  {item.decs}
                 </p>
-                {/* <div className="text-orange-500 font-bold underline ">
-                  <span className="cursor-pointer">Александр Боярчук</span>
-                </div> */}
+                <div className="text-orange-500 font-bold underline ">
+                  <span className="cursor-pointer">{item.author}</span>
+                </div>
               </div>
             </div>
           ))}

@@ -3,7 +3,7 @@ import Image from "next/image";
 
 async function getData(id) {
   try {
-    const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+    const res = await fetch(`http://localhost:8080/api/home/${id}`, {
       cache: "no-store",
     });
 
