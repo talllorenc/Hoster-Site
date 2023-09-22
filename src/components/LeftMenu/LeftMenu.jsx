@@ -30,7 +30,7 @@ const LeftMenu = () => {
   const textClass = mode === "light" ? "text-[#a1a1a1]" : "text-[#a1a1a1]";
 
   return (
-    <div className="flex flex-col w-[400px] pr-[30px] pb-4 pl-[30px]">
+    <div className="flex flex-col w-[300px]">
       <Link
         href={"/"}
         className="font-bold text-[22px] border-b border-[#A1A1A1]"

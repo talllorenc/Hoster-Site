@@ -31,23 +31,23 @@ const DoneSolutions = async () => {
             </div>
           </div>
           {data.map((item) => (
-            <div className="border-b border-[#a3a3a3]" key={item._id}>
+            <div className="border-b border-[#a3a3a3] py-[16px]" key={item._id}>
               <Link href={`done_solutions/${item._id}`}>
-                <h1 className="text-[24px] font-bold text-[#0074CC] cursor-pointer inline-block hover:underline">
+                <h1 className="text-[20px] font-bold text-[#0074CC] cursor-pointer inline-block hover:underline">
                   {item.title}
                 </h1>
               </Link>
               <div className="flex justify-between">
-                <p>
-                  {item.decs}
-                </p>
-                <div className="text-orange-500 font-bold underline ">
-                  <span className="cursor-pointer">{item.author}</span>
-                </div>
+                <p>{item.decs}</p>
+              </div>
+              <div className="bg-[#d9eaf7] p-[7px] w-[150px] rounded-lg text-[#0074CC]">
+                {item.author}
               </div>
             </div>
+            
           ))}
         </div>
+        
       </div>
     </div>
   );
