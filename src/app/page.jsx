@@ -30,7 +30,7 @@ export default function Home() {
             </div>
 
             {/* Кнопка (оставляю ее здесь для примера) */}
-            <Button url="/done_solutions" text="Готовые решения" />
+            <Button url="/posts_page" text="Готовые решения" />
           </div>
         </div>
       </main>
