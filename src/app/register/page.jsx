@@ -18,7 +18,7 @@ const RegisterForm = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://138.197.112.193:3000/api/register", {
+      const res = await fetch("https://138.197.112.193:3000/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
