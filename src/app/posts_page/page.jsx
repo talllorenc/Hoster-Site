@@ -3,7 +3,7 @@ import SearchBar from "@/components/SearchBar/SearchBar";
 import Link from "next/link";
 
 async function getData() {
-  const res = await fetch("http://138.197.112.193:3000/api/home", {
+  const res = await fetch("http://localhost:8080/api/home", {
     cache: "no-store",
   });
 

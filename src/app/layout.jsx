@@ -13,12 +13,18 @@ const montserrat = Montserrat({
 });
 
 export const metadata = {
-  title: "Hoster | dev"
+  title: "Hoster | dev",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <meta
+          http-equiv="Content-Security-Policy"
+          content="upgrade-insecure-requests"
+        />
+      </head>
       <body className={`${montserrat.className}`}>
         <ThemeProvider>
           <div className="main_container">
