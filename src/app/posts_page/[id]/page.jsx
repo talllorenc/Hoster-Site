@@ -1,4 +1,4 @@
-
+"use client"
 
 import LeftMenu from "@/components/LeftMenu/LeftMenu";
 import ShareButton from "@/components/ShareButton/ShareButton";
@@ -32,7 +32,27 @@ export async function generateMetadata({ params }) {
 const SolutionsId2 = async ({ params }) => {
   const data = await getData(params.id);
 
-  const createdAtString = data.createdAt; // Получаем строку с датой и временем
+  const addToFavorites = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/api/user/add_favorite_post", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ postId: data._id }), 
+      });
+  
+      if (response.ok) {
+        console.log("Пост добавлен в избранное");
+      } else {
+        console.error("Ошибка добавления в избранное");
+      }
+    } catch (error) {
+      console.error("Ошибка при запросе на сервер:", error);
+    }
+  };
+
+  const createdAtString = data.createdAt; 
   const createdAtDate = new Date(createdAtString);
   const day = createdAtDate.getDate();
   const month = createdAtDate.getMonth() + 1;
@@ -56,7 +76,7 @@ const SolutionsId2 = async ({ params }) => {
               <div className="flex gap-[10px]">
                 <ShareButton/>
                 
-                <div className="flex items-center text-[16px] cursor-pointer border p-2 rounded-lg hover:bg-[#dc2626]">
+                <div onClick={addToFavorites}  className="flex items-center text-[16px] cursor-pointer border p-2 rounded-lg hover:bg-[#dc2626]">
                   Избранное
                   <Image
                     alt="share"

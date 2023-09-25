@@ -1,18 +1,8 @@
 import LeftMenu from "@/components/LeftMenu/LeftMenu";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import Link from "next/link";
+import {getData} from "../api/getSolutions"
 
-async function getData() {
-  const res = await fetch("http://localhost:8080/api/home", {
-    cache: "no-store",
-  });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
 
 const DoneSolutions2 = async () => {
   const data = await getData();

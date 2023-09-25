@@ -13,7 +13,7 @@ const Solutions = () => {
 
 
   return (
-    <div className="flex justify-center px-4 py-10">
+    <div className="flex justify-center px-4 py-[16px]">
       <div className="flex max-w-[1350px]">
         <LeftMenu />
         <div className="flex flex-col">
