@@ -94,35 +94,53 @@ const developers = [
   },
 ];
 
+const people = [
+  {
+    name: "Michael Foster",
+    role: "Co-Founder / CTO",
+    imageUrl:
+      "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
+  },
+  // More people...
+];
 
 const Developers = () => {
   return (
-    <div className="flex flex-col justify-center max-w-[1700px] mx-auto">
-      <h1 className="text-[30px] font-bold ">Отдел Web-Разработки</h1>
-      <div className="hidden text-[20px] flex flex-wrap gap-[20px] justify-center md:flex border-t py-[15px]">
-        {developers.map((link) => (
-          <div
-            key={link.id}
-            className="flex flex-col w-[13%] bg-zinc-500 bg-opacity-10 rounded-lg p-[10px]"
-          >
-            <Image
-              width={200}
-              height={200}
-              alt="developers"
-              src={link.url}
-              className="w-full rounded-lg"
-            />
-            <span className="font-bold text-[20px]">{link.name}</span>
-            <span className="text-[18px]">{link.position}</span>
-            <button className="bg-blue-500 mt-auto rounded font-bold">
-              <a href={link.hoster} target="_blank" rel="noopener noreferrer">
-                Битрикс24
-              </a>
-            </button>
+    <div className="container">
+      <div className="mx-auto max-w-7xl py-12 px-4 text-center sm:px-6 lg:px-8 lg:py-24">
+        <div className="space-y-8 sm:space-y-12 flex text-center flex-col items-center">
+          <div className="space-y-5 sm:mx-auto sm:max-w-xl sm:space-y-4 lg:max-w-5xl">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              Разработчики
+            </h2>
+            <p className="text-xl text-gray-500">
+              Сотрудники отдела Веб-Разработки
+            </p>
           </div>
-        ))}
+          <ul
+            role="list"
+            className="mx-auto grid grid-cols-6 gap-x-4 gap-y-8 xs:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 lg:gap-x-8 lg:gap-y-12 xl:grid-cols-6"
+          >
+            {developers.map((person) => (
+              <li key={person.name}>
+                <div className="space-y-4">
+                  <img
+                    className="mx-auto h-40 w-40  rounded-full xs:h-20 xs:w-20 in:h-40 in:w-40 lg:h-40 lg:w-40"
+                    src={person.url}
+                    alt=""
+                  />
+                  <div className="space-y-2">
+                    <div className="text-xs font-medium lg:text-sm">
+                      <h3>{person.name}</h3>
+                      <p className="text-[#0284C7]">{person.position}</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-
     </div>
   );
 };
