@@ -41,10 +41,8 @@ const AddPostForm = () => {
         });
 
         setPostCreated(true);
-        // Обработайте успешный ответ, например, показывая сообщение об успешном создании поста
         console.log("Пост успешно создан!");
       } else {
-        // Обработайте ошибку, например, показывая сообщение об ошибке
         console.error("Ошибка при создании поста");
       }
     } catch (error) {
@@ -61,7 +59,7 @@ const AddPostForm = () => {
           </h1>
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col bg-[#2d2d2d] p-[24px] rounded-lg mb-[50px]">
-              <span className="text-[18px] font-bold pb-[10px]">Заголовок</span>{" "}
+              <span className="text-[18px] font-bold pb-[10px] text-white">Заголовок</span>{" "}
               <input
                 className="w-full p-[6px] bg-[#2d2d2d] text-white  rounded-lg border-2 border-[#4a4a4a] focus:border-[#ff9900] focus:outline-none"
                 type="text"
@@ -74,7 +72,7 @@ const AddPostForm = () => {
             </div>
 
             <div className="flex flex-col bg-[#2d2d2d] p-[24px] rounded-lg mb-[30px]">
-              <span className="text-[18px] font-bold pb-[10px]">
+              <span className="text-[18px] font-bold pb-[10px] text-white">
                 Краткое описание решения
               </span>{" "}
               <input
@@ -89,7 +87,7 @@ const AddPostForm = () => {
             </div>
 
             <div className="flex flex-col bg-[#2d2d2d] p-[24px] rounded-lg mb-[30px]">
-              <span className="text-[18px] font-bold pb-[10px]">
+              <span className="text-[18px] font-bold pb-[10px] text-white">
                 Детальное решение
               </span>{" "}
               <textarea
@@ -104,7 +102,7 @@ const AddPostForm = () => {
 
             <div className="flex justify-between  p-[24px] rounded-lg mb-[30px]">
               <button
-                className="bg-green-500 font-bold rounded-lg hover:bg-green-600 text-[20px] px-[15px]"
+                className="bg-green-500 font-bold text-white rounded-lg hover:bg-green-600 text-[20px] px-[15px]"
                 type="submit"
               >
                 Создать пост

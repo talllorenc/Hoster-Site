@@ -53,12 +53,12 @@ a:hover .rotate-image {
 }
 
 .light {
-  background-color: white;
-  color: #111;
+  background-color: rgb(245, 245, 245);
+  color: #000000;
 }
 
 .dark {
-  background-color: #111;
+  background-color: #000000;
   color: #ffffff;
 }
 

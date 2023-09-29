@@ -1,5 +1,4 @@
-"use client"
-
+import FavoriteButton from "@/components/FavoriteButton/FavoriteButton";
 import LeftMenu from "@/components/LeftMenu/LeftMenu";
 import ShareButton from "@/components/ShareButton/ShareButton";
 import Image from "next/image";
@@ -32,27 +31,7 @@ export async function generateMetadata({ params }) {
 const SolutionsId2 = async ({ params }) => {
   const data = await getData(params.id);
 
-  const addToFavorites = async () => {
-    try {
-      const response = await fetch("http://localhost:8080/api/user/add_favorite_post", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ postId: data._id }), 
-      });
-  
-      if (response.ok) {
-        console.log("Пост добавлен в избранное");
-      } else {
-        console.error("Ошибка добавления в избранное");
-      }
-    } catch (error) {
-      console.error("Ошибка при запросе на сервер:", error);
-    }
-  };
-
-  const createdAtString = data.createdAt; 
+  const createdAtString = data.createdAt;
   const createdAtDate = new Date(createdAtString);
   const day = createdAtDate.getDate();
   const month = createdAtDate.getMonth() + 1;
@@ -60,7 +39,7 @@ const SolutionsId2 = async ({ params }) => {
   const formattedCreatedAt = `${day}/${month}/${year}`;
 
   return (
-    <div className="flex max-w-[1350px] mx-auto p-[16px]">
+    <div className="flex max-w-[1350px] mx-auto p-[16px] h-screen">
       <LeftMenu />
       <div className="flex-1">
         <div className=" w-full">
@@ -74,18 +53,9 @@ const SolutionsId2 = async ({ params }) => {
             <div className="border-b py-[20px]">{data.content}</div>
             <div className="flex justify-between items-center py-[20px]">
               <div className="flex gap-[10px]">
-                <ShareButton/>
-                
-                <div onClick={addToFavorites}  className="flex items-center text-[16px] cursor-pointer border p-2 rounded-lg hover:bg-[#dc2626]">
-                  Избранное
-                  <Image
-                    alt="share"
-                    width={20}
-                    height={20}
-                    src="/solution_done/heart_white.png"
-                    className="h-[20px] ml-[5px]"
-                  />
-                </div>
+                <ShareButton />
+                <FavoriteButton postId={data._id}/>
+
               </div>
 
               <div className="flex items-center bg-[#d9eaf7] p-[7px] rounded-lg text-[#0074CC]">

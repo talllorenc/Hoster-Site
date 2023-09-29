@@ -13,7 +13,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata = {
-  title: "Hoster | dev"
+  title: "Hoster | dev",
 };
 
 export default function RootLayout({ children }) {
@@ -21,11 +21,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${montserrat.className}`}>
         <ThemeProvider>
-          <div className="main_container">
-            <Navbar />
-            {children}
-            <Footer />
-          </div>
+            <div className="main_container">
+              <Navbar />
+              {children}
+              <Footer />
+            </div>
         </ThemeProvider>
       </body>
     </html>

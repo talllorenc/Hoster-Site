@@ -1,24 +1,20 @@
 "use client";
 
 import LeftMenu from "@/components/LeftMenu/LeftMenu";
-import Link from "next/link";
 import Image from "next/image";
-import { useContext } from "react";
-import { ThemeContext } from "@/context/ThemeContext";
+
+export const metadata = {
+  title: "HOSTER | Решения",
+};
+
 
 const Solutions = () => {
-  const { mode } = useContext(ThemeContext);
-
-  const textClass = mode === "light" ? "text-zinc-950" : "text-white";
-
-
   return (
     <div className="flex justify-center px-4 py-[16px]">
       <div className="flex max-w-[1350px]">
         <LeftMenu />
         <div className="flex flex-col">
           <div className={`max-w-[650px] text-white`}>
-            <h1 className={`text-[30px] font-bold ${textClass}`}>Предисловие</h1>
             <div className="bg-zinc-900 rounded-xl p-5">
               <div className="border-b py-[15px] flex items-center">
                 Добро пожаловать в раздел "Готовые решения". Здесь собраны все
@@ -60,7 +56,7 @@ const Solutions = () => {
           </div>
 
           <div className="max-w-[650px] text-white">
-            <h1 className={`text-[30px] font-bold ${textClass}`}>Полезные ссылки</h1>
+            <h1 className="text-[30px] text-black font-bold dark:text-white">Полезные ссылки</h1>
             <div className="bg-zinc-900 rounded-xl p-5">
               <div className="flex flex-col py-[15px]">
                 <span className="mb-[10px]">

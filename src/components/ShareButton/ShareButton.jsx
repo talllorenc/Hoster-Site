@@ -1,9 +1,13 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import { useContext } from "react";
+import { ThemeContext } from "@/context/ThemeContext";
 
 const ShareButton = () => {
-    
+  const { mode } = useContext(ThemeContext);
+  const imgSend = mode === "light" ? "/solution_done/send_black.png" : "/solution_done/send_white.png";
+
     const copyToClipboard = () => {
         navigator.clipboard
           .writeText(window.location.toString())
@@ -21,7 +25,7 @@ const ShareButton = () => {
         alt="share"
         width={16}
         height={16}
-        src="/solution_done/send_white.png"
+        src={imgSend}
         className="h-[16px] ml-[5px]"
       />
     </div>

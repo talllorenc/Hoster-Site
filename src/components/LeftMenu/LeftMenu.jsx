@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useContext, useState } from "react";
-import { ThemeContext } from "@/context/ThemeContext";
+import { useState } from "react";
+import LeftMenuInfo from "../LeftMenuInfo/LeftMenuInfo";
 
 const links = [
   {
@@ -25,12 +25,10 @@ const links = [
 
 const LeftMenu = () => {
   const [hoveredLinkId, setHoveredLinkId] = useState(null);
-  const { mode } = useContext(ThemeContext);
 
-  const textClass = mode === "light" ? "text-[#a1a1a1]" : "text-[#a1a1a1]";
 
   return (
-    <div className="flex flex-col w-[300px] p-2">
+    <div className="flex flex-col w-[300px] p-2 ">
       <Link
         href={"/"}
         className="font-bold text-[22px] border-b border-[#A1A1A1]"
@@ -51,9 +49,7 @@ const LeftMenu = () => {
         <h1 className="font-bold pb-[15px]">Решения</h1>
         {links.map((link) => (
           <Link
-            className={`text-[#A1A1A1] whitespace-nowrap hover:text-white ${
-              mode === "light" ? "hover:text-black" : ""
-            }`}
+            className="text-[#A1A1A1] whitespace-nowrap hover:text-black dark:hover:text-white"
             key={link.id}
             href={link.url}
             onMouseEnter={() => setHoveredLinkId(link.id)}
@@ -62,9 +58,7 @@ const LeftMenu = () => {
             <div className="flex justify-between items-center pb-[15px]">
               {link.title}
               <Image
-                className={`h-[10px] ${
-                  mode === "light" ? "filter grayscale" : ""
-                }`}
+                className="h-[10px]"
                 src={
                   hoveredLinkId === link.id
                     ? "/LeftMenu/arrow.png"
@@ -78,6 +72,7 @@ const LeftMenu = () => {
           </Link>
         ))}
       </div>
+      <LeftMenuInfo/>
     </div>
   );
 };

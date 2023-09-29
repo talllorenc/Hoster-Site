@@ -34,10 +34,8 @@ const LoginForm = () => {
         localStorage.setItem("username", loginInfo.username);
         localStorage.setItem("developerName", developerName);
 
-        setTimeout(() => {
-          window.location.reload();
-          window.location.href = "/"; // Перенаправление на главную страницу
-        }, 1000);
+        window.location.href = "/";
+
         console.log("Вход выполнен успешно!");
       } else {
         console.error("Ошибка входа");

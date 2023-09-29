@@ -3,14 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import DarkModeToggle from "../DarkModeToggle/DarkModeToggle";
-import { useContext, useState } from "react";
-import { ThemeContext } from "@/context/ThemeContext";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import jwt_decode from "jwt-decode";
 import useAuth from "@/app/login/useAuthTokenHook";
-
-const developerName =
-  typeof window !== "undefined" ? localStorage.getItem("developerName") : null;
-const authToken =
-  typeof window !== "undefined" ? localStorage.getItem("authToken") : null;
 
 const links = [
   {
@@ -35,29 +31,34 @@ const links = [
   },
 ];
 
-// if (authToken) {
-//   console.log("Token allow:", authToken);
-// } else {
-//   console.log("Token undefined");
-// }
-
 const Navbar = () => {
-  const { mode } = useContext(ThemeContext);
-  const { authenticated, logout } = useAuth();
+  /***************************ПРОВЕРКА ТОКЕНА НА ВРЕМЯ*******************************/
+  const router = useRouter();
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+
+    if (token) {
+      const decodedToken = jwt_decode(token);
+      const { exp } = decodedToken;
+
+      const currentTime = Date.now() / 1000;
+      const timeUntilExpiration = exp - currentTime;
+
+        if (timeUntilExpiration <= 0) {
+          localStorage.removeItem("authToken");
+          router.push("/login");
+        }
+    }
+  }, [] );
+  /***************************ПРОВЕРКА ТОКЕНА НА ВРЕМЯ*******************************/
+
+  const { authenticated } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const handleLogout = () => {
-    logout();
-  };
-
-  const textClass = mode === "light" ? "text-zinc-100" : "text-zinc-950";
-  const textDeveloper = mode === "light" ? "text-zinc-950" : "text-zinc-100";
-  const backgroundClass = mode === "light" ? "bg-zinc-950" : "bg-zinc-300";
 
   return (
     <div>
       <nav
-        className={`flex justify-between items-center px-[20px] py-[1px] bg-neutral-300 w-full ${backgroundClass}`}
+        className="flex justify-between items-center px-[20px] py-[1px] bg-zinc-950 w-full dark:bg-neutral-300"
       >
         <Link href={"/"} className="font-bold text-[22px]">
           <div className="flex items-center ">
@@ -68,16 +69,16 @@ const Navbar = () => {
               alt="logo"
               className="mr-[8px] rotate-image transition-transform"
             />
-            <span className={`font-light ${textClass} xs:hidden in:block`}>
+            <span className="font-light text-white xs:hidden in:block dark:text-black">
               HOSTER
             </span>
             <span className="text-red-500 xs:hidden in:block">dev</span>
           </div>
         </Link>
-        <div className="hidden text-zinc-950 text-[20px] flex items-center gap-[20px] md:flex">
+        <div className="hidden text-zinc-950 text-[20px] flex items-center gap-[20px] md:flex ">
           {links.map((link) => (
             <Link
-              className={`px-[3px] py-[4px] rounded hover:bg-zinc-400 transition-all duration-300 ease-out ${textClass}`}
+              className="px-[3px] py-[4px] text-white rounded hover:bg-zinc-400 transition-all duration-300 ease-out dark:text-black"
               key={link.id}
               href={link.url}
             >
@@ -87,6 +88,11 @@ const Navbar = () => {
         </div>
         <div className="flex items-center">
           <DarkModeToggle />
+          {authenticated && (
+            <Link href='/user_profile' className="border border-rose-500 border-[2px] rounded-full ml-[15px] cursor-pointer">
+              <Image src="/developers/Александр.png" width={40} height={40} alt="user_img" className="rounded-full"/>
+            </Link>
+          )}
           {!authenticated && (
             <Link href="/login">
               <button className=" px-[5px] py-[2px] bg-[#0074CC] text-white rounded cursor-pointer hover:bg-[#0050CC] ml-[20px]">
@@ -94,15 +100,7 @@ const Navbar = () => {
               </button>
             </Link>
           )}
-          {authenticated && (
-            <button
-              onClick={handleLogout}
-              className=" px-[5px] py-[2px] bg-red-500 text-white rounded cursor-pointer hover:bg-red-600 ml-[20px]"
-            >
-              Выход
-            </button>
-          )}
-          <button
+         <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden p-1 text-gray-700 rounded-md outline-none border focus:border-gray-400 focus:border ml-[20px]"
           >
@@ -137,7 +135,7 @@ const Navbar = () => {
             )}
           </button>
           {isMenuOpen && (
-            <div className="md:hidden absolute top-0 right-0 mt-[36px] w-48 bg-zinc-500 rounded shadow-lg z-10">
+            <div className="md:hidden absolute top-0 right-0 mt-[46px] w-48 bg-zinc-500 rounded shadow-lg z-10">
               <ul className="py-4">
                 {links.map((link) => (
                   <li key={link.id}>
@@ -155,9 +153,6 @@ const Navbar = () => {
           )}
         </div>
       </nav>
-      {authenticated && (
-        <span className={`bg-[#d9eaf7] p-[7px] rounded-lg text-[#0074CC] absolute text-[16px] mr-[20px] mt-[16px] font-bold`} style={{right: 0 }}>{developerName}</span>
-      )}
     </div>
   );
 };

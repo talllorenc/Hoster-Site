@@ -1,25 +1,13 @@
-"use client";
+"use client"
 
 import Button from "@/components/button/Button";
 import { useContext } from "react";
 import { ThemeContext } from "@/context/ThemeContext";
-import { get } from "mongoose";
 
-async function getData() {
-  const res = await fetch("http://localhost:8080/api/home", {
-    cache: "no-store",
-  });
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
 
-  return res.json();
-}
-
-const Home = async () => {
+const Home = () => {
   const { mode } = useContext(ThemeContext);
-  const data = await getData();
 
   const backgroundClass =
     mode === "light"
@@ -44,7 +32,6 @@ const Home = async () => {
             </div>
             <div className="flex items-center gap-[15px]">
               <Button url="/posts_page" text="Готовые решения" />
-              <div className="px-[20px] py-[20px] bg-[#0284C7] rounded border-none border-5px width-max-content text-white font-bold">Опубликовано уже {data.length} решений</div>
             </div>
           </div>
         </div>

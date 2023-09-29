@@ -1,8 +1,5 @@
 import Image from "next/image";
 
-
-
-
 const About = () => {
   return (
     <div className="flex flex-col max-w-[1240px] mx-auto py-[16px] px-[15px]">

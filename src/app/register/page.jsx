@@ -6,7 +6,9 @@ const RegisterForm = () => {
   const [regIngo, setRegInfo] = useState({
     username: "",
     password: "",
-    developerName: ""
+    developerName: "",
+    position: "",
+    tel: "",
   });
 
   const handleChange = (e) => {
@@ -29,7 +31,7 @@ const RegisterForm = () => {
       if (res.ok) {
         setTimeout(() => {
           window.location.reload();
-          window.location.href = "/"; 
+          window.location.href = "/";
         }, 1000);
         console.log("Register done!");
       } else {
@@ -39,6 +41,8 @@ const RegisterForm = () => {
       console.error("Error send data to db", error);
     }
   };
+  
+
   return (
     <div>
       <div className="flex h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -65,7 +69,7 @@ const RegisterForm = () => {
           >
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm ">
-            <div>
+              <div>
                 <input
                   type="text"
                   id="developerName"
@@ -73,8 +77,51 @@ const RegisterForm = () => {
                   value={regIngo.developerName}
                   onChange={handleChange}
                   required
-                  className="mb-[20px] relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  placeholder="Ваша фамилия и имя"
+                  className=" relative block w-full appearance-none  rounded-t-md  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  placeholder="Ваше имя и фамилия"
+                />
+              </div>
+              <div>
+                <select
+                  id="position"
+                  placeholder="Ваша должность"
+                  name="position"
+                  value={regIngo.position}
+                  onChange={handleChange}
+                  required
+                  className="relative block w-full appearance-none border border-gray-300 px-3 py-2 text-gray-500 placeholder-gray-100 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                >
+                  <option value="" disabled hidden>
+                    Ваша должность
+                  </option>
+                  <option value="Веб-программист">Веб-программист</option>
+                  <option value="Веб-дизайнер">Веб-дизайнер</option>
+                  <option value="Веб-мастер">Веб-мастер</option>
+                  <option value="Веб-архитектор">Веб-архитектор</option>
+                  <option value="Контент менеджер">Контент менеджер</option>
+                  <option value="Тестировщик">Тестировщик</option>
+                  <option value="Технический директор">
+                    Технический директор
+                  </option>
+                  <option value="Специалист по контекстной рекламе">
+                    Специалист по контекстной рекламе
+                  </option>
+                  <option value="Руководитель отдела">
+                    Руководитель отдела
+                  </option>
+                  <option value="Проект менеджер">Проект менеджер</option>
+                </select>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  id="tel"
+                  name="tel"
+                  value={regIngo.tel}
+                  onChange={handleChange}
+                  required
+                  className="mb-[20px] relative block w-full appearance-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  placeholder="Ваш внутренний телефон"
                 />
               </div>
               <div>
