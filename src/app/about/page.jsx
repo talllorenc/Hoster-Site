@@ -10,7 +10,7 @@ const About = () => {
         height={1920}
         alt="pic"
       />
-      <div className="flex justify-between mt-[40px]">
+      <div className="flex  mt-[40px] xs:flex-col md:flex">
         <div className="flex-1">
           <h1 className="font-bold text-[30px] text-[#0284c7]">
             Отдел Веб Разработок

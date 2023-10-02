@@ -56,7 +56,7 @@ const Solutions = () => {
           </div>
 
           <div className="max-w-[650px] text-white">
-            <h1 className="text-[30px] text-black font-bold dark:text-white">Полезные ссылки</h1>
+            <h1 className="text-black font-bold dark:text-white xs:text-[25px] mt-[20px] in:text-[30px] ">Полезные ссылки</h1>
             <div className="bg-zinc-900 rounded-xl p-5">
               <div className="flex flex-col py-[15px]">
                 <span className="mb-[10px]">

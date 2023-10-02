@@ -14,7 +14,7 @@ const SearchBar = ({handleSearchInput, searchString}) => {
         value={searchString}
       />
       <Link href={"/add_post_form/"}>
-        <button className="bg-green-500 text-[15px] font-bold rounded-lg hover:bg-green-600">
+        <button className="bg-green-500 text-[13px] font-bold rounded-lg hover:bg-green-600">
           Добавить решение
         </button>
       </Link>

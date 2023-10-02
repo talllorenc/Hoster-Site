@@ -7,7 +7,6 @@ const FavoritePosts = () => {
   const [favoritePosts, setFavoritePosts] = useState([]);
   useEffect(() => {
     if (userId) {
-      // Выполняем запрос к серверу для получения избранных постов
       fetch(`http://localhost:8080/api/get_favorite?userId=${userId}`)
         .then((response) => response.json())
         .then((data) => {
@@ -19,54 +18,78 @@ const FavoritePosts = () => {
     }
   }, [userId]);
 
+  const handleRemoveFromFavorites = async (postId) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/remove_favorite?userId=${userId}&postId=${postId}`, {
+        method: "DELETE",
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Ошибка при удалении из избранного. Код: ${response.status}`);
+      }
+
+      const data = await response.json();
+      if (data.success) {
+        setFavoritePosts((prevPosts) => prevPosts.filter((post) => post._id !== postId));
+      } else {
+        console.error("Ошибка при удалении из избранного");
+      }
+    } catch (error) {
+      console.error("Ошибка при удалении из избранного:", error);
+    }
+  };
+  
 
   return (
-<div>
-  <ul role="list" className="divide-y divide-gray-200">
-    {favoritePosts && favoritePosts.length > 0 ? (
-      favoritePosts.map((item) => {
-        const createdAtDate = new Date(item.createdAt);
-        const day = createdAtDate.getDate();
-        const month = createdAtDate.getMonth() + 1;
-        const year = createdAtDate.getFullYear();
-        const formattedCreatedAt = `${day}/${month}/${year}`;
-        return (
-          <li key={item._id}>
-            <Link href={`posts_page/${item._id}`}>
-              <div className="flex flex-col block hover:bg-zinc-600 flex px-4 py-4 sm:px-6">
-                <div className="">
-                  <div className="flex flex-col min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
-                    <div className="flex flex-col ">
-                      <p className="font-medium text-[#0284c7] text-lg">
-                        {item.title}
-                      </p>
-                      <p className="font-normal text-sm text-gray-300">
-                        {item.decs}
-                      </p>
-                    </div>
+    <div>
+      <ul role="list" className="divide-y divide-gray-200">
+        {favoritePosts && favoritePosts.length > 0 ? (
+          favoritePosts.map((item) => {
+            const createdAtDate = new Date(item.createdAt);
+            const day = createdAtDate.getDate();
+            const month = createdAtDate.getMonth() + 1;
+            const year = createdAtDate.getFullYear();
+            const formattedCreatedAt = `${day}/${month}/${year}`;
+            return (
+              <div key={item._id}>
+                <li>
+                  <Link href={`posts_page/${item._id}`}>
+                    <div className="flex flex-col block hover:bg-zinc-600 flex px-4 py-4 sm:px-6">
+                      <div className="">
+                        <div className="flex flex-col min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
+                          <div className="flex flex-col ">
+                            <p className="font-medium text-[#0284c7] text-lg">
+                              {item.title}
+                            </p>
+                            <p className="font-normal text-sm text-gray-300">
+                              {item.decs}
+                            </p>
+                          </div>
 
-                    <div className="flex items-center flex-col text-sm text-gray-500 mt-[20px]">
-                      <p>Решение добавлено {formattedCreatedAt}</p>
-                      <p>
-                        Разработчик решения -{" "}
-                        <span className="font-bold">{item.author}</span>
-                      </p>
+                          <div className="flex items-center flex-col text-sm text-gray-500 mt-[20px] text-center">
+                            <p>Решение добавлено {formattedCreatedAt}</p>
+                            <p>
+                              Разработчик решения -{" "}
+                              <span className="font-bold">{item.author}</span>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
+                </li>
+                <div className="flex items-center justify-center">
+                  <span onClick={() => handleRemoveFromFavorites(item._id)} className="text-white py-2 px-6 rounded-lg bg-red-500 cursor-pointer mb-[10px] hover:bg-red-700">Удалить</span>
                 </div>
               </div>
-            </Link>
-          </li>
-        );
-      })
-    ) : (
-      <p>Нет избранных постов</p>
-    )}
-  </ul>
-</div>
-
+            );
+          })
+        ) : (
+          <p className="text-white px-4 py-4">Нет избранных постов</p>
+        )}
+      </ul>
+    </div>
   );
 };
 
 export default FavoritePosts;
-

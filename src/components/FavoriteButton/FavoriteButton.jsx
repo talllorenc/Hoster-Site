@@ -15,7 +15,6 @@ const FavoriteButton = (props) => {
 
   const [showLoginPopup, setShowLoginPopup] = useState(false);
 
-  const [showFavoritePopup, setShowFavoritePopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const closeLoginPopup = () => {

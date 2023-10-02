@@ -28,7 +28,7 @@ const LeftMenu = () => {
 
 
   return (
-    <div className="flex flex-col w-[300px] p-2 ">
+    <div className="hidden md:flex flex-col w-[300px] p-2 ">
       <Link
         href={"/"}
         className="font-bold text-[22px] border-b border-[#A1A1A1]"

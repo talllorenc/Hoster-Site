@@ -27,7 +27,7 @@ const SearchedPosts = ({posts}) => {
                         </p>
                       </div>
 
-                      <div className="flex items-center flex-col text-sm text-gray-500 mt-[20px]">
+                      <div className="flex items-center flex-col text-sm text-gray-500 mt-[20px] text-center">
                         {/* Вывод отформатированной даты */}
                         <p>Решение добавлено {formattedCreatedAt}</p>
                         <p>

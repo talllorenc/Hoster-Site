@@ -44,12 +44,12 @@ const Navbar = () => {
       const currentTime = Date.now() / 1000;
       const timeUntilExpiration = exp - currentTime;
 
-        if (timeUntilExpiration <= 0) {
-          localStorage.removeItem("authToken");
-          router.push("/login");
-        }
+      if (timeUntilExpiration <= 0) {
+        localStorage.removeItem("authToken");
+        router.push("/login");
+      }
     }
-  }, [] );
+  }, []);
   /***************************ПРОВЕРКА ТОКЕНА НА ВРЕМЯ*******************************/
 
   const { authenticated } = useAuth();
@@ -57,9 +57,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav
-        className="flex justify-between items-center px-[20px] py-[1px] bg-zinc-950 w-full dark:bg-neutral-300"
-      >
+      <nav className="flex justify-between items-center px-[20px] py-[1px] bg-zinc-950 w-full dark:bg-neutral-300">
         <Link href={"/"} className="font-bold text-[22px]">
           <div className="flex items-center ">
             <Image
@@ -89,8 +87,17 @@ const Navbar = () => {
         <div className="flex items-center">
           <DarkModeToggle />
           {authenticated && (
-            <Link href='/user_profile' className="border border-rose-500 border-[2px] rounded-full ml-[15px] cursor-pointer">
-              <Image src="/developers/Александр.png" width={40} height={40} alt="user_img" className="rounded-full"/>
+            <Link
+              href="/user_profile"
+              className="border border-rose-500 border-[2px] rounded-full ml-[15px] cursor-pointer"
+            >
+              <Image
+                src="/developers/Александр.png"
+                width={40}
+                height={40}
+                alt="user_img"
+                className="rounded-full"
+              />
             </Link>
           )}
           {!authenticated && (
@@ -100,7 +107,7 @@ const Navbar = () => {
               </button>
             </Link>
           )}
-         <button
+          <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden p-1 text-gray-700 rounded-md outline-none border focus:border-gray-400 focus:border ml-[20px]"
           >
@@ -136,7 +143,7 @@ const Navbar = () => {
           </button>
           {isMenuOpen && (
             <div className="md:hidden absolute top-0 right-0 mt-[46px] w-48 bg-zinc-500 rounded shadow-lg z-10">
-              <ul className="py-4">
+              {/* <ul className="py-4">
                 {links.map((link) => (
                   <li key={link.id}>
                     <Link
@@ -148,7 +155,58 @@ const Navbar = () => {
                     </Link>
                   </li>
                 ))}
-              </ul>
+              </ul> */}
+              <Link
+                className="block px-4 py-2 text-white hover:bg-gray-200 font-bold"
+                href="/about"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                О нас
+              </Link>
+              <Link
+                className="block px-4 py-2 text-white hover:bg-gray-200 font-bold"
+                href="/solutions"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Решения
+              </Link>
+              <div className="ml-[10px]">
+                <Link
+                  className="block px-4 py-2 text-white hover:bg-gray-200 text-zinc-300"
+                  href="/posts_page"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Готовые решения
+                </Link>
+                <Link
+                  className="block px-4 py-2 text-white hover:bg-gray-200 text-zinc-300"
+                  href="/solutions"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Полезные сервисы
+                </Link>
+                <Link
+                  className="block px-4 py-2 text-white hover:bg-gray-200 text-zinc-300"
+                  href="/solutions"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Проектная документация
+                </Link>
+              </div>
+              <Link
+                className="block px-4 py-2 text-white hover:bg-gray-200 font-bold"
+                href="/developers"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Разработчики
+              </Link>
+              <Link
+                className="block px-4 py-2 text-white hover:bg-gray-200 font-bold"
+                href="/feedback"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Обратная связь
+              </Link>
             </div>
           )}
         </div>

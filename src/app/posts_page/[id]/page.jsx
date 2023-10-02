@@ -39,7 +39,7 @@ const SolutionsId2 = async ({ params }) => {
   const formattedCreatedAt = `${day}/${month}/${year}`;
 
   return (
-    <div className="flex max-w-[1350px] mx-auto p-[16px] h-screen">
+    <div className="flex max-w-[1350px] mx-auto p-[16px] in:h-screen">
       <LeftMenu />
       <div className="flex-1">
         <div className=" w-full">
@@ -51,14 +51,14 @@ const SolutionsId2 = async ({ params }) => {
 
             <span className="mt-[20px]">{data.decs}</span>
             <div className="border-b py-[20px]">{data.content}</div>
-            <div className="flex justify-between items-center py-[20px]">
+            <div className="flex flex-col items-center py-[20px] ">
               <div className="flex gap-[10px]">
                 <ShareButton />
                 <FavoriteButton postId={data._id}/>
 
               </div>
 
-              <div className="flex items-center bg-[#d9eaf7] p-[7px] rounded-lg text-[#0074CC]">
+              <div className="flex items-center bg-[#d9eaf7] p-[7px] rounded-lg text-[#0074CC] xs:mt-[20px]">
                 <Image
                   width={50}
                   height={50}
