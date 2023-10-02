@@ -8,7 +8,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     if (userId) {
-      fetch(`http://localhost:8080/api/${userId}`)
+      fetch(`http://138.197.112.193:3000/api/${userId}`)
         .then((response) => response.json())
         .then((data) => {
           setUserInfo(data);

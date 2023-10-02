@@ -26,7 +26,7 @@ const AddPostForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8080/api/add_post", {
+      const response = await fetch("http://138.197.112.193:3000/api/add_post", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
