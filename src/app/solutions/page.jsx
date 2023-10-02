@@ -3,11 +3,6 @@
 import LeftMenu from "@/components/LeftMenu/LeftMenu";
 import Image from "next/image";
 
-export const metadata = {
-  title: "HOSTER | Решения",
-};
-
-
 const Solutions = () => {
   return (
     <div className="flex justify-center px-4 py-[16px]">
