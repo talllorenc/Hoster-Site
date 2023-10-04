@@ -2,10 +2,11 @@ import FavoriteButton from "@/components/FavoriteButton/FavoriteButton";
 import LeftMenu from "@/components/LeftMenu/LeftMenu";
 import ShareButton from "@/components/ShareButton/ShareButton";
 import Image from "next/image";
+import CodeHighlighter from "@/components/CodeHighlight/CodeHighlight";
 
 async function getData(id) {
   try {
-    const res = await fetch(`http://138.197.112.193:3000/api/home/${id}`, {
+    const res = await fetch(`http://localhost:8080/api/home/${id}`, {
       cache: "no-store",
     });
 
@@ -39,23 +40,51 @@ const SolutionsId2 = async ({ params }) => {
   const formattedCreatedAt = `${day}/${month}/${year}`;
 
   return (
-    <div className="flex max-w-[1350px] mx-auto p-[16px] in:h-screen">
+    <div className="flex max-w-[1350px] mx-auto p-[16px] ">
       <LeftMenu />
       <div className="flex-1">
         <div className=" w-full">
           <div className="flex flex-col">
-            <div className="border-b">
+            <div className="border-b flex flex-col py-[15px]">
               <h1 className="text-[30px] font-bold ">{data.title}</h1>
-              <span>Добавлена {formattedCreatedAt}</span>
+              <span className="text-[18px]">{data.decs}</span>
+              <span className="text-gray-400">
+                Добавлена {formattedCreatedAt}
+              </span>
+            </div>
+            <div className="">
+              {data.content &&
+                data.content.blocks &&
+                data.content.blocks.map((block) => {
+                  if (block.type === "paragraph") {
+                    return (
+                      <div className="py-[15px]">
+                        <span>{block.data.text}</span>
+                      </div>
+                    );
+                  } else if (block.type === "code") {
+                    return <CodeHighlighter content={block.data.code} />;
+                  } else if (block.type === "image") {
+                    return (
+                      <div className="flex flex-col items-center py-[15px]">
+                        <img
+                          className="max-w-full w-full h-auto object-contain rounded-xl"
+                          src={block.data.file.url}
+                          alt={block.data.caption}
+                        />
+                        <div className="w-full text-center text-[#9c9b9b]">
+                          <span className="">{block.data.caption}</span>
+                        </div>
+                      </div>
+                    );
+                  }
+                })}
             </div>
 
-            <span className="mt-[20px]">{data.decs}</span>
-            <div className="border-b py-[20px]">{data.content}</div>
             <div className="flex flex-col items-center py-[20px] ">
               <div className="flex gap-[10px]">
                 <ShareButton />
-                <FavoriteButton postId={data._id}/>
-
+                <FavoriteButton postId={data._id} />
               </div>
 
               <div className="flex items-center bg-[#d9eaf7] p-[7px] rounded-lg text-[#0074CC] xs:mt-[20px]">

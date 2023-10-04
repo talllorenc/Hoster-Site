@@ -1,11 +1,10 @@
 "use client"
-import { useState } from "react"
 import Link from "next/link";
 
 const SearchedPosts = ({posts}) => {
   return (
     <div>
-      <ul role="list" className="divide-y divide-gray-200">
+      <ul role="list" className="divide-y divide-gray-200 bg-[#1c1b1b]">
         {posts.map((item) => {
           const createdAtDate = new Date(item.createdAt);
           const day = createdAtDate.getDate();
@@ -15,7 +14,7 @@ const SearchedPosts = ({posts}) => {
           return (
             <li key={item._id}>
               <Link href={`posts_page/${item._id}`}>
-                <div className="flex flex-col block hover:bg-zinc-600 flex px-4 py-4 sm:px-6">
+                <div className="flex flex-col block hover:bg-[#3c3b3b] flex px-4 py-4 sm:px-6">
                   <div className="">
                     <div className="flex flex-col min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
                       <div className="flex flex-col ">

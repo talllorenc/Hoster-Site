@@ -7,7 +7,7 @@ const FavoritePosts = () => {
   const [favoritePosts, setFavoritePosts] = useState([]);
   useEffect(() => {
     if (userId) {
-      fetch(`http://138.197.112.193:3000/api/get_favorite?userId=${userId}`)
+      fetch(`http://localhost:8080/api/get_favorite?userId=${userId}`)
         .then((response) => response.json())
         .then((data) => {
           setFavoritePosts(data.favoritePosts);
@@ -20,7 +20,7 @@ const FavoritePosts = () => {
 
   const handleRemoveFromFavorites = async (postId) => {
     try {
-      const response = await fetch(`http://138.197.112.193:3000/api/remove_favorite?userId=${userId}&postId=${postId}`, {
+      const response = await fetch(`http://localhost:8080/api/remove_favorite?userId=${userId}&postId=${postId}`, {
         method: "DELETE",
       });
   
@@ -30,6 +30,7 @@ const FavoritePosts = () => {
 
       const data = await response.json();
       if (data.success) {
+        
         setFavoritePosts((prevPosts) => prevPosts.filter((post) => post._id !== postId));
       } else {
         console.error("Ошибка при удалении из избранного");
@@ -42,7 +43,7 @@ const FavoritePosts = () => {
 
   return (
     <div>
-      <ul role="list" className="divide-y divide-gray-200">
+      <ul role="list" className="divide-y divide-gray-200 bg-[#1c1b1b]">
         {favoritePosts && favoritePosts.length > 0 ? (
           favoritePosts.map((item) => {
             const createdAtDate = new Date(item.createdAt);
@@ -54,7 +55,7 @@ const FavoritePosts = () => {
               <div key={item._id}>
                 <li>
                   <Link href={`posts_page/${item._id}`}>
-                    <div className="flex flex-col block hover:bg-zinc-600 flex px-4 py-4 sm:px-6">
+                    <div className="flex flex-col block hover:bg-[#3c3b3b] flex px-4 py-4 sm:px-6">
                       <div className="">
                         <div className="flex flex-col min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
                           <div className="flex flex-col ">

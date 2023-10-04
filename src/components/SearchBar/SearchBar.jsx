@@ -1,23 +1,18 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 
-const SearchBar = ({handleSearchInput, searchString}) => {
-
+const SearchBar = ({ handleSearchInput, searchString }) => {
   return (
-    <div className="flex w-full items-center mb-[20px]">
+    <div className="flex w-full items-center justify-center mb-[20px]">
       <input
         placeholder="Какой у вас вопрос?"
         type="text"
-        className="w-full p-[10px] h-[40px] mr-[5px] text-white font-bold bg-[#27272a] outline-none rounded-lg"
-        onChange={(e)=>handleSearchInput(e)}
+        className="w-full p-[10px] h-[48px] mr-[5px] text-white font-bold bg-[#1c1b1b] outline-none rounded-lg"
+        onChange={(e) => handleSearchInput(e)}
         value={searchString}
       />
-      <Link href={"/add_post_form/"}>
-        <button className="bg-green-500 text-[13px] font-bold rounded-lg hover:bg-green-600">
-          Добавить решение
-        </button>
-      </Link>
+      <Link className="bg-green-500 rounded-lg text-center hover:bg-green-600 font-bold" href={"/add_post_form/"}>Добавить решение</Link>
     </div>
   );
 };

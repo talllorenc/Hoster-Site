@@ -9,18 +9,48 @@ const RegisterForm = () => {
     developerName: "",
     position: "",
     tel: "",
+    photoUrl: "",
   });
+  const [isUploaded, setIsUploaded] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setRegInfo({ ...regIngo, [name]: value });
   };
 
-  const handleOnSumbit = async (e) => {
-    e.preventDefault();
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
 
     try {
-      const res = await fetch("http://138.197.112.193:3000/api/register", {
+      const response = await fetch(
+        "http://localhost:8080/api/upload_profile_img",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (response.ok) {
+        const imageData = await response.json();
+        const imagePath = imageData.file.url;
+
+        setRegInfo({ ...regIngo, photoUrl: imagePath });
+        setIsUploaded(true);
+        console.log("Изображение успешно загружено:", imagePath);
+      } else {
+        console.error("Ошибка при загрузке изображения");
+      }
+    } catch (error) {
+      console.error("Ошибка при отправке запроса на сервер", error);
+    }
+  };
+
+  const handleOnSumbit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("http://localhost:8080/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,7 +71,6 @@ const RegisterForm = () => {
       console.error("Error send data to db", error);
     }
   };
-  
 
   return (
     <div>
@@ -120,10 +149,33 @@ const RegisterForm = () => {
                   value={regIngo.tel}
                   onChange={handleChange}
                   required
-                  className="mb-[20px] relative block w-full appearance-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  className=" relative block w-full appearance-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   placeholder="Ваш внутренний телефон"
                 />
               </div>
+              {!isUploaded ? (
+                <div>
+                  <input
+                    type="file"
+                    id="photoUrl"
+                    name="photoUrl"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                  />
+                  <label
+                    htmlFor="photoUrl"
+                    className="mb-[20px] bg-white relative block w-full appearance-none border border-gray-300 rounded-b-md px-3 py-2 text-gray-500 placeholder-gray-100 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  >
+                    Выберите изображение
+                  </label>
+                  <span>{regIngo.photoUrl}</span>
+                </div>
+              ) : (
+                <div className="bg-white relative block w-full appearance-none border border-gray-300 rounded-b-md px-3 py-2 text-green-500 font-bold">
+                  Изображение загружено
+                </div>
+              )}
+
               <div>
                 <input
                   type="text"

@@ -52,7 +52,7 @@ const Navbar = () => {
   }, []);
   /***************************ПРОВЕРКА ТОКЕНА НА ВРЕМЯ*******************************/
 
-  const { authenticated } = useAuth();
+  const { authenticated, user } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -84,6 +84,7 @@ const Navbar = () => {
             </Link>
           ))}
         </div>
+
         <div className="flex items-center">
           <DarkModeToggle />
           {authenticated && (
@@ -91,13 +92,13 @@ const Navbar = () => {
               href="/user_profile"
               className="border border-rose-500 border-[2px] rounded-full ml-[15px] cursor-pointer"
             >
-              <Image
-                src="/developers/Александр.png"
-                width={40}
-                height={40}
-                alt="user_img"
-                className="rounded-full"
-              />
+              {user && (
+                <img
+                  src={user.photoUrl}
+                  alt=""
+                  className="rounded-full w-[40px] h-[40px]"
+                />
+              )}
             </Link>
           )}
           {!authenticated && (

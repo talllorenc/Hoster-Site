@@ -1,14 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import useAuth from "../login/useAuthTokenHook";
 import Image from "next/image";
+import { createReactEditorJS } from "react-editor-js";
+import { EDITOR_JS_TOOLS } from "@/components/Editor/tools";
+
 
 const developerName =
   typeof window !== "undefined" ? localStorage.getItem("developerName") : null;
 
 const AddPostForm = () => {
-  const { authenticated } = useAuth();
+  const { authenticated, token } = useAuth();
+  const [data, setData] = useState("")
+
   const [formData, setFormData] = useState({
     title: "",
     decs: "",
@@ -18,28 +23,54 @@ const AddPostForm = () => {
 
   const [postCreated, setPostCreated] = useState(false);
 
+  const editorCore = useRef(null);
+  const ReactEditorJS = createReactEditorJS();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value
+    }));
   };
+
+  const handleInitialize = useCallback((instance) => {
+    instance._editorJS.isReady
+      .then(() => {
+        editorCore.current = instance;
+      })
+      .catch((err) => console.log("An error occurred", err));
+  }, []);
+
+  const handleSave = useCallback(async () => {
+    const savedData = await editorCore.current.save();
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      content: savedData, 
+    }));
+  }, [setFormData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://138.197.112.193:3000/api/add_post", {
+      const token = localStorage.getItem("authToken");
+  
+      const response = await fetch("http://localhost:8080/api/add_post", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: token
         },
         body: JSON.stringify(formData),
       });
+  
       if (response.ok) {
         setFormData({
           title: "",
           decs: "",
           content: "",
         });
-
+  
         setPostCreated(true);
         console.log("Пост успешно создан!");
       } else {
@@ -49,6 +80,9 @@ const AddPostForm = () => {
       console.error("Ошибка при отправке запроса на сервер", error);
     }
   };
+  
+
+
 
   return (
     <div className="flex justify-center flex-col max-w-[900px] mx-auto">
@@ -58,10 +92,12 @@ const AddPostForm = () => {
             Добавить свое решение
           </h1>
           <form onSubmit={handleSubmit}>
-            <div className="flex flex-col bg-[#2d2d2d] p-[24px] rounded-lg mb-[50px]">
-              <span className="text-[18px] font-bold pb-[10px] text-white">Заголовок</span>{" "}
+            <div className="flex flex-col bg-[#1c1b1b] p-[24px] rounded-lg mb-[50px]">
+              <span className="text-[18px] font-bold pb-[10px] text-white">
+                Заголовок
+              </span>{" "}
               <input
-                className="w-full p-[6px] bg-[#2d2d2d] text-white  rounded-lg border-2 border-[#4a4a4a] focus:border-[#ff9900] focus:outline-none"
+                className="w-full p-[6px] bg-[#1d1d1d] text-white  rounded-lg border-2 border-[#4a4a4a] focus:border-[#ff9900] focus:outline-none"
                 type="text"
                 name="title"
                 required
@@ -71,12 +107,12 @@ const AddPostForm = () => {
               />
             </div>
 
-            <div className="flex flex-col bg-[#2d2d2d] p-[24px] rounded-lg mb-[30px]">
+            <div className="flex flex-col bg-[#1c1b1b] p-[24px] rounded-lg mb-[30px]">
               <span className="text-[18px] font-bold pb-[10px] text-white">
                 Краткое описание решения
               </span>{" "}
               <input
-                className="w-full p-[6px] bg-[#2d2d2d] text-white rounded-lg border-2 border-[#4a4a4a] focus:border-[#ff9900] focus:outline-none"
+                className="w-full p-[6px] bg-[#1d1d1d] text-white rounded-lg border-2 border-[#4a4a4a] focus:border-[#ff9900] focus:outline-none"
                 type="text"
                 name="decs"
                 placeholder="Скрипт для подключения SMS центра"
@@ -86,18 +122,16 @@ const AddPostForm = () => {
               />
             </div>
 
-            <div className="flex flex-col bg-[#2d2d2d] p-[24px] rounded-lg mb-[30px]">
+            <div className="flex flex-col bg-[#1c1b1b] p-[24px] rounded-lg mb-[30px]">
               <span className="text-[18px] font-bold pb-[10px] text-white">
                 Детальное решение
               </span>{" "}
-              <textarea
-                className="w-full min-h-[300px] p-[6px] bg-[#2d2d2d] text-white rounded-lg border-2 border-[#4a4a4a] focus:border-[#ff9900] focus:outline-none"
-                name="content"
-                required
-                placeholder="Ваш код или совет как решить указанную выше проблему. !!!На данный момент нет возможности редактирования текста, добавления блоков с кодом, данный функционал пока в разработке!"
-                value={formData.content}
-                onChange={handleChange}
-              ></textarea>
+              <ReactEditorJS
+                tools={EDITOR_JS_TOOLS}
+                onInitialize={handleInitialize}
+                onChange={handleSave}
+                defaultValue={data}
+              />
             </div>
 
             <div className="flex justify-between  p-[24px] rounded-lg mb-[30px]">
@@ -114,7 +148,6 @@ const AddPostForm = () => {
                     <p>Ваше решение добавлено,</p>
                     <p>спасибо за ваш труд!</p>
                   </div>
-                  {/* Дополнительный контент после успешного создания поста */}
                 </div>
               )}
               <div className="flex flex-col items-center">
@@ -128,16 +161,21 @@ const AddPostForm = () => {
         </>
       ) : (
         <div className="flex flex-col gap-[10px] items-center justify-center h-screen">
-                  <div className="text-center">
-        <Image className="mx-auto w-auto" src="/main-logo.svg" width={70} height={70} alt="logo" />
-        <span className="text-[25px]">
-            HOSTER<span className="font-bold text-red-500">dev</span>
-          </span>
-          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-white">
-          Пожалуйста, авторизуйтесь, чтобы добавить решение
-          </h2>
-
-        </div>
+          <div className="text-center">
+            <Image
+              className="mx-auto w-auto"
+              src="/main-logo.svg"
+              width={70}
+              height={70}
+              alt="logo"
+            />
+            <span className="text-[25px]">
+              HOSTER<span className="font-bold text-red-500">dev</span>
+            </span>
+            <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-white">
+              Пожалуйста, авторизуйтесь, чтобы добавить решение
+            </h2>
+          </div>
         </div>
       )}
     </div>

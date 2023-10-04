@@ -3,8 +3,8 @@
 import Image from "next/image";
 import LeftMenu from "@/components/LeftMenu/LeftMenu";
 import useAuth from "@/app/login/useAuthTokenHook";
-import FavoritePosts from "@/components/FavoritePosts/FavoritePosts";
 import UserProfileInfo from "@/components/UserProfile/UserProfile";
+import UserActivityMenu from "@/components/UserActivityMenu/UserActivityMenu";
 
 const UserProfile = () => {
   const { authenticated } = useAuth();
@@ -17,11 +17,11 @@ const UserProfile = () => {
           <div className="flex-1">
           <UserProfileInfo/>
 
-            <div className="overflow-hidden rounded-lg bg-zinc-800 shadow mt-[20px]">
-              <h2 className="font-bold text-[21px] p-[24px] border-b text-white xs:text-[18px]">
-                Избранные решения
+            <div className="overflow-hidden rounded-lg bg-[#1c1b1b] shadow mt-[20px] ">
+              <h2 className="font-bold text-[21px] p-[24px] text-white xs:text-[18px]">
+                Ваша активность
               </h2>
-              <FavoritePosts />
+              <UserActivityMenu/>
             </div>
           </div>
         </>
