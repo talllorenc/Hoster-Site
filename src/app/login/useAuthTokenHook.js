@@ -23,6 +23,8 @@ const useAuth = () => {
     }
   }, []);
 
+  console.log(userId);
+
   const fetchUserData = async (userId) => {
     try {
       const response = await fetch(`http://localhost:8080/api/user/${userId}`);
