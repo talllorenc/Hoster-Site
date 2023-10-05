@@ -25,10 +25,10 @@ const UserProfile = () => {
         </div>
         <div className="hidden cursor-pointer in:flex gap-[15px]">
           <Link
-            href="/feedback"
+            href="/solutions"
             className="px-[16px] py-[8px] bg-[#0260C7] rounded-lg text-white font-bold"
           >
-            Задать вопрос
+            Решения
           </Link>
           <span
             onClick={logout}
@@ -40,10 +40,10 @@ const UserProfile = () => {
       </div>
       <div className="cursor-pointer  flex justify-center gap-[15px] mb-[20px] in:hidden">
         <Link
-          href="/feedback"
+          href="/solutions"
           className="px-[16px] py-[8px] bg-[#0260C7] rounded-lg text-white font-bold"
         >
-          Задать вопрос
+          Решения
         </Link>
         <span
           onClick={logout}

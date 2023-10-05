@@ -8,7 +8,7 @@ const SearchBar = ({ handleSearchInput, searchString }) => {
       <input
         placeholder="Какой у вас вопрос?"
         type="text"
-        className="w-full p-[10px] h-[48px] mr-[5px] text-white font-bold bg-[#1c1b1b] outline-none rounded-lg"
+        className="w-full p-[10px] h-[48px] mr-[5px] text-white font-bold bg-zinc-900 outline-none rounded-lg"
         onChange={(e) => handleSearchInput(e)}
         value={searchString}
       />

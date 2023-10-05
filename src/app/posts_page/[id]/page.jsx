@@ -66,9 +66,9 @@ const SolutionsId2 = async ({ params }) => {
                     return <CodeHighlighter content={block.data.code} />;
                   } else if (block.type === "image") {
                     return (
-                      <div className="flex flex-col items-center py-[15px]">
+                      <div className="flex flex-wrap justify-center gap-4">
                         <img
-                          className="max-w-full w-full h-auto object-contain rounded-xl"
+                          className="max-w-[350px] w-full h-auto object-contain rounded-xl"
                           src={block.data.file.url}
                           alt={block.data.caption}
                         />
@@ -92,7 +92,7 @@ const SolutionsId2 = async ({ params }) => {
                   width={50}
                   height={50}
                   alt="profile"
-                  src="/developers/Александр.png"
+                  src="/main-logo.svg"
                   className="mr-[5px] rounded-lg "
                 />
                 {data.author}

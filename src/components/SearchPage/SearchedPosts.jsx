@@ -4,7 +4,7 @@ import Link from "next/link";
 const SearchedPosts = ({posts}) => {
   return (
     <div>
-      <ul role="list" className="divide-y divide-gray-200 bg-[#1c1b1b]">
+      <ul role="list" className="divide-y divide-gray-200 bg-zinc-900">
         {posts.map((item) => {
           const createdAtDate = new Date(item.createdAt);
           const day = createdAtDate.getDate();

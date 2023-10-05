@@ -43,11 +43,11 @@ const links = [
     title: "Разработчики",
     url: "/developers",
   },
-  {
-    id: 4,
-    title: "Образная связь",
-    url: "/feedback",
-  },
+  // {
+  //   id: 4,
+  //   title: "Образная связь",
+  //   url: "/feedback",
+  // },
 ];
 const Footer = () => {
 
