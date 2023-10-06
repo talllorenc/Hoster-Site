@@ -11,18 +11,6 @@ const ShareButton = () => {
       ? "/solution_done/send_black.png"
       : "/solution_done/send_white.png";
 
-  const copyToClipboard = () => {
-    if (typeof window !== "undefined") {
-      navigator.clipboard
-        .writeText(window.location.toString())
-        .then(() => {
-          alert("Ссылка скопирована в буфер обмена");
-        })
-        .catch((error) => {
-          console.error("Ошибка при копировании ссылки:", error);
-        });
-    }
-  };
   return (
     <div className="flex items-center text-[16px] cursor-pointer border p-2 rounded-lg hover:bg-[#22c55e]">
       <button onClick={copyToClipboard}>Поделиться</button>

@@ -59,12 +59,7 @@ const RegisterForm = () => {
       });
 
       if (res.ok) {
-        setTimeout(() => {
-          if (typeof window !== "undefined") {
-            window.location.reload();
-            window.location.href = "/";
-          }
-        }, 1000);
+  
         console.log("Register done!");
       } else {
         console.error("Error with registration");
