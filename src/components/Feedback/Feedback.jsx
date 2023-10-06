@@ -19,7 +19,7 @@ const Feedback = () => {
     e.preventDefault();
 
     try {
-        const response = await fetch("http://localhost:8080/api/feedback", {
+        const response = await fetch("http://138.197.112.193:3000/api/feedback", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
