@@ -34,7 +34,9 @@ const LoginForm = () => {
         localStorage.setItem("username", loginInfo.username);
         localStorage.setItem("developerName", developerName);
 
-        window.location.href = "/";
+        if (typeof window !== 'undefined') {
+          window.location.href = "/";
+        }
 
         console.log("Вход выполнен успешно!");
       } else {

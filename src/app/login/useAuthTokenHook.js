@@ -36,11 +36,13 @@ const useAuth = () => {
       console.error("Ошибка при отправке запроса на сервер", error);
     }
   };
-  
+
   const logout = () => {
     localStorage.removeItem("authToken");
     setAuthenticated(false);
-    window.location.href = "/";
+    if (typeof window !== "undefined") {
+      window.location.href = "/";
+    }
   };
 
   return { authenticated, logout, token, userId, user };
