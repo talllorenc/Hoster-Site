@@ -6,10 +6,6 @@ import Image from "next/image";
 import { createReactEditorJS } from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "@/components/Editor/tools";
 
-
-// const developerName =
-//   typeof window !== "undefined" ? localStorage.getItem("developerName") : null;
-
 const AddPostForm = () => {
   const { authenticated, token } = useAuth();
   const [data, setData] = useState("")
