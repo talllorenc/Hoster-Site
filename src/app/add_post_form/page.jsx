@@ -19,8 +19,6 @@ const AddPostForm = () => {
 
   const [postCreated, setPostCreated] = useState(false);
 
-  const editorCore = useRef(null);
-  const ReactEditorJS = createReactEditorJS();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,21 +28,7 @@ const AddPostForm = () => {
     }));
   };
 
-  const handleInitialize = useCallback((instance) => {
-    instance._editorJS.isReady
-      .then(() => {
-        editorCore.current = instance;
-      })
-      .catch((err) => console.log("An error occurred", err));
-  }, []);
 
-  const handleSave = useCallback(async () => {
-    const savedData = await editorCore.current.save();
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      content: savedData,
-    }));
-  }, [setFormData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
