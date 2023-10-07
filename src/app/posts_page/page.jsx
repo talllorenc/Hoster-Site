@@ -6,7 +6,7 @@ const DoneSolutions2 = async () => {
   const data = await getData();
  
   return (
-    <div className="flex max-w-[1350px] mx-auto p-[16px] h-screen">
+    <div className="flex max-w-[1350px] mx-auto p-[16px]">
     <LeftMenu className=""/>
     <div className="flex-1" >
       <SearchPage posts={data}/>
