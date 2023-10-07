@@ -1,15 +1,10 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback } from "react";
 import useAuth from "../login/useAuthTokenHook";
 import Image from "next/image";
-import dynamic from "next/dynamic"; // Импортируем динамический импорт для ReactEditorJS
+import { createReactEditorJS } from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "@/components/Editor/tools";
-
-const ReactEditorJS = dynamic(
-  () => import("react-editor-js").then((mod) => mod.ReactEditorJS),
-  { ssr: false }
-); // Динамический импорт без серверного рендеринга
 
 const AddPostForm = () => {
   const { authenticated, token } = useAuth();
@@ -24,16 +19,8 @@ const AddPostForm = () => {
 
   const [postCreated, setPostCreated] = useState(false);
 
-  useEffect(() => {
-    const initializeEditor = async () => {
-      const editorInstance = await ReactEditorJS.create();
-      const editorCore = useRef(null);
-
-      editorCore.current = editorInstance;
-    };
-
-    initializeEditor();
-  }, []);
+  const editorCore = useRef(null);
+  const ReactEditorJS = createReactEditorJS();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -64,17 +51,14 @@ const AddPostForm = () => {
     try {
       const token = localStorage.getItem("authToken");
 
-      const response = await fetch(
-        "http://138.197.112.193:3000/api/add_post",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token,
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch("http://138.197.112.193:3000/api/add_post", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(formData),
+      });
 
       if (response.ok) {
         setFormData({
@@ -135,12 +119,14 @@ const AddPostForm = () => {
               <span className="text-[18px] font-bold pb-[10px] text-white">
                 Детальное решение
               </span>{" "}
-              <ReactEditorJS
-                tools={EDITOR_JS_TOOLS}
-                onInitialize={handleInitialize}
-                onChange={handleSave}
-                defaultValue={data}
-              />
+              {typeof window !== "undefined" ? (
+                <ReactEditorJS
+                  tools={EDITOR_JS_TOOLS}
+                  onInitialize={handleInitialize}
+                  onChange={handleSave}
+                  defaultValue={data}
+                />
+              ) : null}
             </div>
 
             <div className="flex justify-between  p-[24px] rounded-lg mb-[30px]">
