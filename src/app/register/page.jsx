@@ -25,7 +25,7 @@ const RegisterForm = () => {
 
     try {
       const response = await fetch(
-        "http://138.197.112.193:3000/api/upload_profile_img",
+        "https://server.hoster-dev.kz/api/upload_profile_img",
         {
           method: "POST",
           body: formData,
@@ -50,7 +50,7 @@ const RegisterForm = () => {
   const handleOnSumbit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://138.197.112.193:3000/api/register", {
+      const res = await fetch("https://server.hoster-dev.kz/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

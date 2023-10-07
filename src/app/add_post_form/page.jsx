@@ -35,7 +35,7 @@ const AddPostForm = () => {
     try {
       const token = localStorage.getItem("authToken");
 
-      const response = await fetch("http://138.197.112.193:3000/api/add_post", {
+      const response = await fetch("https://server.hoster-dev.kz/api/add_post", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

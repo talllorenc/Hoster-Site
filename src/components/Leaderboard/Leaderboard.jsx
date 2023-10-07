@@ -5,7 +5,7 @@ const Leaderboard = () => {
   const [topAuthors, setTopAuthors] = useState([]);
 
   useEffect(() => {
-    fetch("http://138.197.112.193:3000/api/get_leader_users")
+    fetch("https://server.hoster-dev.kz/api/get_leader_users")
       .then((response) => response.json())
       .then((data) => {
         const topAuthorsData = data.slice(0, 3);

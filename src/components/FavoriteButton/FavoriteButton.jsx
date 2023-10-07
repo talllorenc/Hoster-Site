@@ -30,7 +30,7 @@ const FavoriteButton = (props) => {
       try {
         const postId = props.postId; 
   
-        const response = await fetch("http://138.197.112.193:3000/api/add_favorite_post", {
+        const response = await fetch("https://server.hoster-dev.kz/api/add_favorite_post", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -8,7 +8,7 @@ const AddedPosts = () => {
   const [addedPosts, setAddedPosts] = useState([]);
   useEffect(() => {
     if (userId !== null) {
-      fetch(`http://138.197.112.193:3000/api/get_users_posts?userId=${userId}`)
+      fetch(`https://server.hoster-dev.kz/api/get_users_posts?userId=${userId}`)
         .then((response) => response.json())
         .then((data) => {
           setAddedPosts(data.addedPosts);
@@ -22,7 +22,7 @@ const AddedPosts = () => {
   const handleRemoveFromAdded = async (postId) => {
     try {
       const response = await fetch(
-        `http://138.197.112.193:3000/api/remove_added_post?userId=${userId}&postId=${postId}`,
+        `https://server.hoster-dev.kz/api/remove_added_post?userId=${userId}&postId=${postId}`,
         {
           method: "DELETE",
         }

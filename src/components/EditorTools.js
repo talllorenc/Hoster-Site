@@ -9,7 +9,7 @@ export const EDITOR_TOOLS = {
     class: ImageTool,
     config: {
       endpoints: {
-        byFile: "http://localhost:8080/api/upload_image",
+        byFile: "https://server.hoster-dev.kz/api/upload_image",
       },
     },
   },

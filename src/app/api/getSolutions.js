@@ -1,5 +1,5 @@
 export async function getData() {
-    const res = await fetch("http://138.197.112.193:3000/api/home", {
+    const res = await fetch("https://server.hoster-dev.kz/api/home", {
       cache: "no-store",
     });
   

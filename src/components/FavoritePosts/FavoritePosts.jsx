@@ -7,7 +7,7 @@ const FavoritePosts = () => {
   const [favoritePosts, setFavoritePosts] = useState([]);
   useEffect(() => {
     if (userId) {
-      fetch(`http://138.197.112.193:3000/api/get_favorite?userId=${userId}`)
+      fetch(`https://server.hoster-dev.kz/api/get_favorite?userId=${userId}`)
         .then((response) => response.json())
         .then((data) => {
           setFavoritePosts(data.favoritePosts);
@@ -20,7 +20,7 @@ const FavoritePosts = () => {
 
   const handleRemoveFromFavorites = async (postId) => {
     try {
-      const response = await fetch(`http://138.197.112.193:3000/api/remove_favorite?userId=${userId}&postId=${postId}`, {
+      const response = await fetch(`https://server.hoster-dev.kz/api/remove_favorite?userId=${userId}&postId=${postId}`, {
         method: "DELETE",
       });
   
