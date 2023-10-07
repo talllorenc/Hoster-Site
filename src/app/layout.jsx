@@ -32,8 +32,5 @@ export default function RootLayout({ children }) {
         </body>
       </html>
     );
-  } else {
-    // Если код выполняется на сервере, то просто возвращаем пустой контейнер
-    return <div />;
   }
 }
