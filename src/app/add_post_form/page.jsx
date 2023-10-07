@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback } from "react";
 import useAuth from "../login/useAuthTokenHook";
 import Image from "next/image";
 import { createReactEditorJS } from "react-editor-js";
@@ -20,16 +20,7 @@ const AddPostForm = () => {
   const [postCreated, setPostCreated] = useState(false);
 
   const editorCore = useRef(null);
-
-  useEffect(() => {
-    const initializeEditor = async () => {
-      const ReactEditorJS = createReactEditorJS();
-      const editorInstance = await ReactEditorJS.create();
-      editorCore.current = editorInstance;
-    };
-
-    initializeEditor();
-  }, []);
+  const ReactEditorJS = createReactEditorJS();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -128,14 +119,6 @@ const AddPostForm = () => {
               <span className="text-[18px] font-bold pb-[10px] text-white">
                 Детальное решение
               </span>{" "}
-              {typeof window !== "undefined" ? (
-                <ReactEditorJS
-                  tools={EDITOR_JS_TOOLS}
-                  onInitialize={handleInitialize}
-                  onChange={handleSave}
-                  defaultValue={data}
-                />
-              ) : null}
             </div>
 
             <div className="flex justify-between  p-[24px] rounded-lg mb-[30px]">
