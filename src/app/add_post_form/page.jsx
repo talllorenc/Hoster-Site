@@ -1,23 +1,26 @@
+"use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState } from "react";
 import useAuth from "../login/useAuthTokenHook";
 import Image from "next/image";
-import { createReactEditorJS } from "react-editor-js";
-import { EDITOR_JS_TOOLS } from "@/components/Editor/tools";
+import dynamic from "next/dynamic";
+
+const Editor = dynamic(() => import("@/components/Editor"), {
+  ssr: false,
+});
 
 const AddPostForm = () => {
-  const { authenticated, token } = useAuth();
-  const [data, setData] = useState("");
+  const { authenticated } = useAuth();
 
   const [formData, setFormData] = useState({
     title: "",
     decs: "",
     content: "",
-    author: developerName,
+    author: "22",
   });
-
+  const [data, setData] = useState();
+  console.log(data);
   const [postCreated, setPostCreated] = useState(false);
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,8 +29,6 @@ const AddPostForm = () => {
       [name]: value,
     }));
   };
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,7 +41,12 @@ const AddPostForm = () => {
           "Content-Type": "application/json",
           Authorization: token,
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          title: formData.title,
+          decs: formData.decs,
+          content: data, 
+          author: formData.author,
+        }),
       });
 
       if (response.ok) {
@@ -102,6 +108,11 @@ const AddPostForm = () => {
               <span className="text-[18px] font-bold pb-[10px] text-white">
                 Детальное решение
               </span>{" "}
+              <Editor
+                data={data}
+                onChange={setData}
+                holder="editorjs-container"
+              />
             </div>
 
             <div className="flex justify-between  p-[24px] rounded-lg mb-[30px]">
@@ -124,7 +135,7 @@ const AddPostForm = () => {
                 <span className="text-[18px] font-bold pb-[10px]">
                   Разработчик решения
                 </span>
-                <span className={`ml-[20px] text-[16px]`}>{developerName}</span>
+                <span className={`ml-[20px] text-[16px]`}>sdsd</span>
               </div>
             </div>
           </form>

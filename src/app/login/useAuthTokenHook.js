@@ -25,7 +25,7 @@ const useAuth = () => {
 
   const fetchUserData = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/user/${userId}`);
+      const response = await fetch(`http://138.197.112.193:3000/api/user/${userId}`);
       if (response.ok) {
         const userData = await response.json();
         setUser(userData.user);
