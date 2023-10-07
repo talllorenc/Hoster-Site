@@ -33,7 +33,8 @@ const LoginForm = () => {
         localStorage.setItem("authToken", token);
         localStorage.setItem("username", loginInfo.username);
         localStorage.setItem("developerName", developerName);
-
+        
+        window.location.href = "/";
         console.log("Вход выполнен успешно!");
       } else {
         console.error("Ошибка входа");

@@ -40,6 +40,7 @@ const useAuth = () => {
   const logout = () => {
     localStorage.removeItem("authToken");
     setAuthenticated(false);
+    window.location.href('/')
   };
 
   return { authenticated, logout, token, userId, user };

@@ -59,7 +59,9 @@ const RegisterForm = () => {
       });
 
       if (res.ok) {
-  
+        setTimeout(()=>{
+          window.location.href = "/login";
+        }, 2000)
         console.log("Register done!");
       } else {
         console.error("Error with registration");
