@@ -13,24 +13,21 @@ const montserrat = Montserrat({
 });
 
 export const metadata = {
-  title: "Hoster | dev"
+  title: "Hoster | dev",
 };
 
 export default function RootLayout({ children }) {
-  // Проверяем, что код выполняется на клиентской стороне
-  if (typeof window !== "undefined") {
-    return (
-      <html lang="en">
-        <body className={`${montserrat.className}`}>
-          <ThemeProvider>
+  return (
+    <html lang="en">
+      <body className={`${montserrat.className}`}>
+        <ThemeProvider>
             <div className="main_container">
               <Navbar />
               {children}
-              {/* <Footer /> */}
+              <Footer />
             </div>
-          </ThemeProvider>
-        </body>
-      </html>
-    );
-  }
+        </ThemeProvider>
+      </body>
+    </html>
+  );
 }
