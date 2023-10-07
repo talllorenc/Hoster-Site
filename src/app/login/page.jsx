@@ -18,7 +18,7 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://138.197.112.193:3000/api/login", {
+      const response = await fetch("http://138.197.112.193:3000/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
