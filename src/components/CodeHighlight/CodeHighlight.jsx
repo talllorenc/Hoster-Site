@@ -37,7 +37,7 @@ const ContentW = ({ content }) => {
       <div className="relative">
         <pre className="">
           <code className="rounded-xl">
-            <span className="">{content}</span>
+            <span className="max-w-[1018px]">{content}</span>
           </code>
         </pre>
         <button

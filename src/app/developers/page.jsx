@@ -104,7 +104,7 @@ const people = [
 
 const Developers = () => {
   return (
-    <div className="container">
+    <div className="">
       <div className="mx-auto max-w-7xl py-12 px-4 text-center sm:px-6 lg:px-8 lg:py-24">
         <div className="space-y-8 sm:space-y-12 flex text-center flex-col items-center">
           <div className="space-y-5 sm:mx-auto sm:max-w-xl sm:space-y-4 lg:max-w-5xl">
@@ -123,7 +123,7 @@ const Developers = () => {
               <li key={person.name}>
                 <div className="space-y-4">
                   <img
-                    className="mx-auto h-40 w-40  rounded-full xs:h-20 xs:w-20 in:h-40 in:w-40 lg:h-40 lg:w-40"
+                    className="mx-auto h-30 w-30  rounded-full xs:h-40 xs:w-40 in:h-40 in:w-40 lg:h-40 lg:w-40"
                     src={person.url}
                     alt=""
                   />
