@@ -8,7 +8,7 @@ const DoneSolutions2 = async () => {
   return (
     <div className="flex max-w-[1350px] mx-auto p-[16px] h-screen">
     <LeftMenu className=""/>
-    <div className="flex-1 overflow-y-auto" >
+    <div className="flex-1" >
       <SearchPage posts={data}/>
     </div>
   </div>

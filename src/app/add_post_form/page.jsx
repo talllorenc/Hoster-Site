@@ -10,16 +10,15 @@ const Editor = dynamic(() => import("@/components/Editor"), {
 });
 
 const AddPostForm = () => {
-  const { authenticated } = useAuth();
+  const { authenticated, user } = useAuth();
 
   const [formData, setFormData] = useState({
     title: "",
     decs: "",
     content: "",
-    author: "22",
+    author: user?.developerName || "",
   });
   const [data, setData] = useState();
-  console.log(data);
   const [postCreated, setPostCreated] = useState(false);
 
   const handleChange = (e) => {
@@ -35,19 +34,22 @@ const AddPostForm = () => {
     try {
       const token = localStorage.getItem("authToken");
 
-      const response = await fetch("https://server.hoster-dev.kz/api/add_post", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-        body: JSON.stringify({
-          title: formData.title,
-          decs: formData.decs,
-          content: data, 
-          author: formData.author,
-        }),
-      });
+      const response = await fetch(
+        "https://server.hoster-dev.kz/api/add_post",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+          body: JSON.stringify({
+            title: formData.title,
+            decs: formData.decs,
+            content: data,
+            author: user.developerName,
+          }),
+        }
+      );
 
       if (response.ok) {
         setFormData({
@@ -131,12 +133,16 @@ const AddPostForm = () => {
                   </div>
                 </div>
               )}
-              <div className="flex flex-col items-center">
-                <span className="text-[18px] font-bold pb-[10px]">
-                  Разработчик решения
-                </span>
-                <span className={`ml-[20px] text-[16px]`}>sdsd</span>
-              </div>
+              {user && (
+                <div className="flex flex-col items-center">
+                  <span className="text-[18px] font-bold pb-[10px]">
+                    Разработчик решения
+                  </span>
+                  <span className={`ml-[20px] text-[16px]`}>
+                    {user.developerName}
+                  </span>
+                </div>
+              )}
             </div>
           </form>
         </>
