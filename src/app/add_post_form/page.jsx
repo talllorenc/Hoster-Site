@@ -1,49 +1,83 @@
-"use client"
+"use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import useAuth from "../login/useAuthTokenHook";
 import Image from "next/image";
-import EditorJSComponent from "@/components/Editor/Editor"; // Импортируем компонент с React EditorJS
+import { createReactEditorJS } from "react-editor-js";
+import { EDITOR_JS_TOOLS } from "@/components/Editor/tools";
 
 const AddPostForm = () => {
   const { authenticated, token } = useAuth();
+  const [data, setData] = useState("")
+
   const [formData, setFormData] = useState({
     title: "",
     decs: "",
     content: "",
     author: developerName,
   });
+
   const [postCreated, setPostCreated] = useState(false);
+
+  useEffect(() => {
+    const initializeEditor = async () => {
+      const ReactEditorJS = createReactEditorJS();
+      const editorInstance = await ReactEditorJS.create();
+  const editorCore = useRef(null);
+
+      editorCore.current = editorInstance;
+    };
+
+    initializeEditor();
+  }, []);
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [name]: value,
+      [name]: value
     }));
   };
+
+  const handleInitialize = useCallback((instance) => {
+    instance._editorJS.isReady
+      .then(() => {
+        editorCore.current = instance;
+      })
+      .catch((err) => console.log("An error occurred", err));
+  }, []);
+
+  const handleSave = useCallback(async () => {
+    const savedData = await editorCore.current.save();
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      content: savedData, 
+    }));
+  }, [setFormData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("authToken");
-
+  
       const response = await fetch("http://138.197.112.193:3000/api/add_post", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: token,
+          Authorization: token
         },
         body: JSON.stringify(formData),
       });
-
+  
       if (response.ok) {
         setFormData({
           title: "",
           decs: "",
           content: "",
         });
-
+  
         setPostCreated(true);
         console.log("Пост успешно создан!");
       } else {
@@ -53,6 +87,9 @@ const AddPostForm = () => {
       console.error("Ошибка при отправке запроса на сервер", error);
     }
   };
+  
+
+
 
   return (
     <div className="flex justify-center flex-col max-w-[900px] mx-auto">
@@ -96,10 +133,11 @@ const AddPostForm = () => {
               <span className="text-[18px] font-bold pb-[10px] text-white">
                 Детальное решение
               </span>{" "}
-              {/* Вставляем компонент EditorJSComponent вместо ReactEditorJS */}
-              <EditorJSComponent
-                formData={formData}
-                setFormData={setFormData}
+              <ReactEditorJS
+                tools={EDITOR_JS_TOOLS}
+                onInitialize={handleInitialize}
+                onChange={handleSave}
+                defaultValue={data}
               />
             </div>
 
