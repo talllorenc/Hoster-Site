@@ -1,30 +1,19 @@
-"use client";
+"use client"
 
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState } from "react";
 import useAuth from "../login/useAuthTokenHook";
 import Image from "next/image";
-import dynamic from "next/dynamic"; 
-import { EDITOR_JS_TOOLS } from "@/components/Editor/tools";
-
-
-const ReactEditorJS = dynamic(() => import("react-editor-js"), {
-  ssr: false, 
-});
+import EditorJSComponent from "@/components/Editor/Editor"; // Импортируем компонент с React EditorJS
 
 const AddPostForm = () => {
   const { authenticated, token } = useAuth();
-  const [data, setData] = useState("");
-
   const [formData, setFormData] = useState({
     title: "",
     decs: "",
     content: "",
     author: developerName,
   });
-
   const [postCreated, setPostCreated] = useState(false);
-
-  const editorCore = useRef(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,22 +22,6 @@ const AddPostForm = () => {
       [name]: value,
     }));
   };
-
-  const handleInitialize = useCallback((instance) => {
-    instance._editorJS.isReady
-      .then(() => {
-        editorCore.current = instance;
-      })
-      .catch((err) => console.log("An error occurred", err));
-  }, []);
-
-  const handleSave = useCallback(async () => {
-    const savedData = await editorCore.current.save();
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      content: savedData,
-    }));
-  }, [setFormData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -123,11 +96,10 @@ const AddPostForm = () => {
               <span className="text-[18px] font-bold pb-[10px] text-white">
                 Детальное решение
               </span>{" "}
-              <ReactEditorJS
-                tools={EDITOR_JS_TOOLS}
-                onInitialize={handleInitialize}
-                onChange={handleSave}
-                defaultValue={data}
+              {/* Вставляем компонент EditorJSComponent вместо ReactEditorJS */}
+              <EditorJSComponent
+                formData={formData}
+                setFormData={setFormData}
               />
             </div>
 
