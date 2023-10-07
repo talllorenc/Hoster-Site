@@ -3,10 +3,13 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import useAuth from "../login/useAuthTokenHook";
 import Image from "next/image";
-import dynamic from 'next/dynamic'; // Импортируем динамический импорт для ReactEditorJS
-
-const ReactEditorJS = dynamic(() => import('react-editor-js'), { ssr: false }); // Динамический импорт без серверного рендеринга
+import dynamic from "next/dynamic"; // Импортируем динамический импорт для ReactEditorJS
 import { EDITOR_JS_TOOLS } from "@/components/Editor/tools";
+
+const ReactEditorJS = dynamic(
+  () => import("react-editor-js").then((mod) => mod.ReactEditorJS),
+  { ssr: false }
+); // Динамический импорт без серверного рендеринга
 
 const AddPostForm = () => {
   const { authenticated, token } = useAuth();
@@ -21,7 +24,16 @@ const AddPostForm = () => {
 
   const [postCreated, setPostCreated] = useState(false);
 
-  const editorCore = useRef(null);
+  useEffect(() => {
+    const initializeEditor = async () => {
+      const editorInstance = await ReactEditorJS.create();
+      const editorCore = useRef(null);
+
+      editorCore.current = editorInstance;
+    };
+
+    initializeEditor();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -52,14 +64,17 @@ const AddPostForm = () => {
     try {
       const token = localStorage.getItem("authToken");
 
-      const response = await fetch("http://138.197.112.193:3000/api/add_post", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "http://138.197.112.193:3000/api/add_post",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (response.ok) {
         setFormData({
