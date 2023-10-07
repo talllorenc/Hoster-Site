@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import useAuth from "../login/useAuthTokenHook";
 import Image from "next/image";
 import { createReactEditorJS } from "react-editor-js";
@@ -20,7 +20,16 @@ const AddPostForm = () => {
   const [postCreated, setPostCreated] = useState(false);
 
   const editorCore = useRef(null);
-  const ReactEditorJS = createReactEditorJS();
+
+  useEffect(() => {
+    const initializeEditor = async () => {
+      const ReactEditorJS = createReactEditorJS();
+      const editorInstance = await ReactEditorJS.create();
+      editorCore.current = editorInstance;
+    };
+
+    initializeEditor();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
