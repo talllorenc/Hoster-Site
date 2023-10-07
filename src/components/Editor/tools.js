@@ -9,7 +9,7 @@ export const EDITOR_JS_TOOLS = {
       class: ImageTool,
       config: {
         endpoints: {
-          byFile: 'http://localhost:8080/api/upload_image', // Замените на ваш серверный endpoint для загрузки файлов
+          byFile: 'http://138.197.112.193:3000/api/upload_image', 
         },
       },
     },
