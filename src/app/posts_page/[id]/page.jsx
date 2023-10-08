@@ -42,8 +42,8 @@ const SolutionsId2 = async ({ params }) => {
   return (
     <div className="flex max-w-[1350px] mx-auto p-[16px] ">
       <LeftMenu />
-      <div className="flex-1">
-        <div className=" w-full">
+      <div className="flex-1 overflow-x-auto">
+        <div className="w-full">
           <div className="flex flex-col">
             <div className="border-b flex flex-col py-[15px]">
               <h1 className="text-[30px] font-bold ">{data.title}</h1>

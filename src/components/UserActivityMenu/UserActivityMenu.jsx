@@ -24,7 +24,7 @@ const UserActivityMenu = () => {
           onClick={handleClickFavorite}
         >   
             <Image src="/UserActivityMenu/heart.png" width={35} height={35} alt="favorite"/>
-          <span className="text-[18px]">Избранные решения</span>
+          <span className="text-[18px] text-white">Избранные решения</span>
         </div>
         <div
           className={`flex  items-center justify-center gap-[5px] w-[50%] p-[24px] hover:bg-[#2c2b2b] cursor-pointer ${
@@ -33,7 +33,7 @@ const UserActivityMenu = () => {
           onClick={handleClickAdded}
         >
             <Image src="/UserActivityMenu/added.png" width={35} height={35} alt="added"/>
-          <span className="text-[18px]">Добавленные решения</span>
+          <span className="text-[18px] text-white">Добавленные решения</span>
         </div>
       </div>
       {activeComponent === "favorite" && <FavoritePosts />}

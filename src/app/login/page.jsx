@@ -9,6 +9,8 @@ const LoginForm = () => {
     password: "",
   });
 
+  const [errorMessage, setErrorMessage] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLoginInfo({ ...loginInfo, [name]: value });
@@ -33,11 +35,15 @@ const LoginForm = () => {
         localStorage.setItem("authToken", token);
         localStorage.setItem("username", loginInfo.username);
         localStorage.setItem("developerName", developerName);
-        
+
         window.location.href = "/";
         console.log("Вход выполнен успешно!");
       } else {
         console.error("Ошибка входа");
+        setErrorMessage(true);
+        setTimeout(() => {
+          setErrorMessage(false)
+        }, 3000);
       }
     } catch (error) {
       console.error("Ошибка отправки данных на сервер", error);
@@ -105,6 +111,9 @@ const LoginForm = () => {
               </button>
             </div>
           </form>
+          {errorMessage && (
+            <div className="text-red-500 text-center">Неверный логин или пароль</div>
+          )}
         </div>
       </div>
     </div>

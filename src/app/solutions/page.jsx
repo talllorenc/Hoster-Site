@@ -22,6 +22,7 @@ const Solutions = () => {
                   className="ml-[10px]"
                   width={120}
                   height={120}
+                  alt="some pic"
                 />
               </div>
               <div className="border-b py-[15px] flex items-center">
@@ -34,6 +35,7 @@ const Solutions = () => {
                   className="ml-[10px]"
                   width={120}
                   height={120}
+                  alt="some pic"
                 />
               </div>
               <div className="py-[15px] flex items-center">
@@ -45,6 +47,7 @@ const Solutions = () => {
                   className="ml-[10px]"
                   width={120}
                   height={120}
+                  alt="some pic"
                 />
               </div>
             </div>
@@ -74,6 +77,28 @@ const Solutions = () => {
                     target="_blank"
                   >
                     "Next.js (v.9.6.7)"
+                  </a>
+                </span>
+                <span className="mb-[10px]">
+                  Серверная часть сайта написана на{" "}
+                  <a
+                    className="bg-orange-700 px-[5px] rounded-lg"
+                    href="https://nodejs.org/"
+                    title=" иконки"
+                    target="_blank"
+                  >
+                    "Node.js"
+                  </a>
+                </span>
+                <span className="mb-[10px]">
+                  В качестве базы данных использовалась{" "}
+                  <a
+                    className="bg-orange-700 px-[5px] rounded-lg"
+                    href="https://www.mongodb.com/"
+                    title=" иконки"
+                    target="_blank"
+                  >
+                    "MongoDB"
                   </a>
                 </span>
                 <span className="mb-[10px]">
